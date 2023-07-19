@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="NightWatchClientApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:NightWatchClientApp"
+    xmlns:v="clr-namespace:NightWatchClientApp.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+
+
+    <ShellItem Route="LoginPage">
+        <ShellContent ContentTemplate="{DataTemplate v:LoginPage}"/>
+    </ShellItem>
+
+    <TabBar Route="MainPage">
+        
+        <Tab Title="моя команда" NavigationPage.HasNavigationBar="false" IsVisible="{Binding IsVisibleEvents}" >
+            <ShellContent ContentTemplate="{DataTemplate v:MyTeamPage}" />
+        </Tab>
+        
+        <Tab Title="все мероприятия" >
+            <ShellContent ContentTemplate="{DataTemplate v:AllEventsPage}" />
+        </Tab>
+      
+        <Tab Title="профиль" >
+            <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" />
+        </Tab>
+    </TabBar>
+</Shell>

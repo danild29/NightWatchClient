@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NightWatchClientApp.Views.ProfilePage"
+             Title="ProfilePage"
+             NavigationPage.HasNavigationBar="false">
+    
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Image Source="dotnet_bot.png" WidthRequest="300" />
+                <StackLayout Orientation="Horizontal" Padding="30">
+                    <Label Text="имя " FontSize="Body"/>
+                    <Label Text="{Binding Name}" FontSize="Body"/>
+                </StackLayout>
+            </StackLayout>
+
+            <Button Margin="20" Text="насторйки" FontSize="Body"  Command="{Binding GoToSettingsCommand}"/>
+            <Button Margin="20" Text="о программе" FontSize="Body"  Command="{Binding GoToAboutProgramCommand}" />
+            <Button Margin="20" Text="получить прумиум" FontSize="Body"  Command="{Binding GetPremiumCommand}"/>
+            <Button Margin="20" Text="выйти" FontSize="Body" Command="{Binding LogOutCommand}"/>
+
+
+        </StackLayout>
+ 
+
+    </ContentPage.Content>
+
+</ContentPage>

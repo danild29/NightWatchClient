@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NightWatchClientApp.Views.CreateAccountPage"
+             Title="CreateAccountPage"
+             xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
+             NavigationPage.HasNavigationBar="false">
+
+
+    <ContentPage.Content>
+
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+
+
+            <Frame CornerRadius="30"  Padding="0" Margin="0,10,0,0">
+                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
+                    <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
+
+                    <Entry  Text="{Binding UserNickName}" Placeholder="имя пользователя" 
+                             HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+            </Frame>
+
+            <Frame CornerRadius="30"  Padding="0" Margin="0,10,0,0">
+                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
+                    <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
+
+                    <Entry Text="{Binding UserLoginName}" Placeholder="Логин" HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+            </Frame>
+
+
+            <Frame CornerRadius="30"  Padding="0" Margin="0,10,0,0">
+                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
+                    <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
+
+                    <Entry IsPassword="True" Text="{Binding UserPassword}" Placeholder="Пароль"  HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+            </Frame>
+
+            <Label Text="{Binding LoginMessage, Mode=OneWay}" 
+                   IsVisible="{Binding TurnLoginMessage, Mode=OneWay}" Margin="0,10,0,0">
+            </Label>
+
+
+            <Button Text="Зарегистрироваться" WidthRequest="400"
+                    Command="{Binding RegisterNewUserCommand}"/>
+
+
+            <Button Text="Назад" Command="{Binding GoBackCommand}" />
+
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
