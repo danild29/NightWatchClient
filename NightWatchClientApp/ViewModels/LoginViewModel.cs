@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using NightWatchClientApp.Data;
 using NightWatchClientApp.Models;
 using NightWatchClientApp.Views;
+using Microsoft.Maui.ApplicationModel.Communication;
+using System.Text.Json;
 
 namespace NightWatchClientApp.ViewModels;
 
@@ -19,35 +21,72 @@ public partial class LoginViewModel : ObservableObject
 
     public LoginViewModel(IUserData userData) {
         _userData = userData;
+
+    }
+    [ObservableProperty] private string userLoginName = string.Empty;
+    [ObservableProperty] private string userPassword = string.Empty;
+    [ObservableProperty] private string loginMessage = string.Empty;
+    [ObservableProperty] private bool turnLoginMessage = false;
+
+    [ObservableProperty] private bool isBusy = false;
+    [ObservableProperty] private bool isVisible = true;
+    partial void OnIsBusyChanged(bool oldValue, bool newValue) => IsVisible = !newValue;
+
+    public async Task GetDataFromPrefernces()
+    {
+        IsBusy = true;
+        try
+        {
+            string data = Preferences.Default.Get<string>(nameof(UserLoginDto), null);
+            if (data == null) return;
+
+            var user = JsonSerializer.Deserialize<UserLoginDto>(data);
+
+            ErrorModel er = await _userData.Login(user);
+            if (er == null)
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+            else
+            {
+                LoginMessage = er.message;
+                TurnLoginMessage = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("LoginViewModel", ex.Message, "ok");
+        }
+        finally 
+        {
+            IsBusy = false; 
+        }
+    
     }
 
-    [ObservableProperty]
-    private string userLoginName = string.Empty;
-    [ObservableProperty]
-    private string userPassword = string.Empty;
-    [ObservableProperty]
-    private string loginMessage = string.Empty;
-    [ObservableProperty]
-    private bool turnLoginMessage = false;
+    
 
 
     [RelayCommand]
     private async Task GoToMainPage()
     {
-        User user = _userData.Login(UserLoginName, UserPassword);
-        if (user != null)
-        {
-            UserAppInfo.UserData = user;
-            LoginMessage = "gooood";
-            TurnLoginMessage = true;
+        IsBusy = true;
 
+        UserLoginDto user = new(UserLoginName, UserPassword);
+
+        ErrorModel er = await _userData.Login(user);
+        if (er == null)
+        {
+            Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(user));
             await Shell.Current.GoToAsync("//MainPage");
         }
         else
         {
-            LoginMessage = "непраильный имя пользователя или пароль";
+            LoginMessage = er.message;
             TurnLoginMessage = true;
         }
+
+        IsBusy = false;
     }
 
 

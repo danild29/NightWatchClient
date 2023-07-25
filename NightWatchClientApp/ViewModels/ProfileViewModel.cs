@@ -8,7 +8,9 @@ namespace NightWatchClientApp.ViewModels;
 
 public partial class ProfileViewModel: ObservableObject
 {
-    public string Name => UserAppInfo.UserData.FullName;
+    [ObservableProperty]
+    public string name = UserAppInfo.UserData.FullName;
+
 
     public IUserData _userData { get; }
 
@@ -17,20 +19,20 @@ public partial class ProfileViewModel: ObservableObject
         _userData = userData;
     }
 
+
     [RelayCommand]
-    private async void LogOut()
+    private async Task LogOut()
     {
         UserAppInfo.UserData = null;
+        Preferences.Default.Remove(nameof(UserLoginDto));
 
-        await Shell.Current.GoToAsync(nameof(LoginPage));
-        
-        //App.Current.MainPage = new NavigationPage(new LoginPage());
+        await Shell.Current.GoToAsync("///" + nameof(LoginPage));
     }
 
     [RelayCommand]
     private void GoToSettings()
     {
-        //App.Current.MainPage.Navigation.PushAsync(new AboutProgramPage());
+        Name = UserAppInfo.UserData.FullName;
     }
 
     [RelayCommand]

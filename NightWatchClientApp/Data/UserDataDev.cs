@@ -1,7 +1,10 @@
-﻿using System;
+﻿using NightWatchClientApp.DevsFeatures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 namespace NightWatchClientApp.Data;
@@ -12,44 +15,88 @@ public class UserDataDev : IUserData
 {
     private List<User> userList = new List<User>();
 
+    private const string userFile = @"C:\Users\Dania\source\repos\NightWatchClient\NightWatchClientApp\Data\FIlesTXT\userFile.txt";
+
+
 
     public UserDataDev()
     {
-        User user1 = new()
+        DevMain.WriteToLogs(userFile);
+     
+        try
         {
-            FullName = "Dania",
-            Email = "d1",
-            Id = 1,
-            Password = "p1"
-        };
-        userList.Add(user1);
-        User user2 = new()
+            List<string> file = File.ReadAllLines(userFile).ToList();
+
+            foreach (string line in file)
+            {
+                var user = JsonSerializer.Deserialize<User>(line);
+                userList.Add(user);
+            }
+
+        }
+        catch (Exception)
         {
-            FullName = "Dania",
-            Email = "igor@login",
-            Id = 2,
-            Password = "p2"
-        };
-        userList.Add(user2);
+
+            User user1 = new()
+            {
+                FullName = "Dania",
+                Email = "d1",
+                _Id = "1",
+                Password = "p1"
+            };
+            userList.Add(user1);
+            User user2 = new()
+            {
+                FullName = "Dania",
+                Email = "igor@login",
+                _Id = "2",
+                Password = "p2"
+            };
+            userList.Add(user2);
+
+
+            List<string> file = new();
+            foreach (User user in userList)
+            {
+                string userStr = JsonSerializer.Serialize(user);
+                file.Add(userStr);
+            }
+
+            File.WriteAllLines(userFile, file);
+        }
+       
     }
 
-    public User Login(string email, string password)
+    public async Task<ErrorModel> Login(UserLoginDto userToFind)
     {
         foreach (var user in userList)
         {
-            if (user.Email == email && user.Password == password)
+            if (user.Email == userToFind.email && user.Password == userToFind.password)
             {
-
-                return user;
+                UserAppInfo.UserData = user;
+                return null;
             }
         }
-        return null;
+        return new ErrorModel("not found");
+
+
     }
 
-    public bool Register(User user)
+    public async Task<ErrorModel> Register(UserRegisterDto newUser)
     {
+        var user = new User(newUser.email, newUser.password, newUser.fullName);
+        user._Id = (userList.Count + 1).ToString();
         userList.Add(user);
-        return true;
+        List<string> file = new();
+        foreach (User u in userList)
+        {
+            string userStr = JsonSerializer.Serialize(u);
+            file.Add(userStr);
+        }
+
+        File.WriteAllLines(userFile, file);
+
+        return null;
         
     }
 

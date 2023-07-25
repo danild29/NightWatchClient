@@ -5,13 +5,14 @@ namespace NightWatchClientApp.Models;
 
 public class User
 {
-    public int Id { get; set; }
+    public string _Id { get; set; }
     public string FullName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-
-    public int? TeamId { get; set; }
+    public string Token { get; set; }
     public bool IsPremium { get; set; }
+
+    public int? TeamId { get; set; } = null;
 
     public User()
     {
@@ -24,7 +25,6 @@ public class User
         Password = password;
         FullName = fullName;
         IsPremium = false;
-        TeamId = null;
     }
 }
 

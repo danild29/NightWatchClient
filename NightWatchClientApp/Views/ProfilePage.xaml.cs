@@ -1,3 +1,5 @@
+
+
 namespace NightWatchClientApp.Views;
 
 public partial class ProfilePage : ContentPage
@@ -6,5 +8,10 @@ public partial class ProfilePage : ContentPage
 	{
 		InitializeComponent();
         BindingContext = ServiceHelper.GetService<ProfileViewModel>();
+    }
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        ServiceHelper.GetService<ProfileViewModel>().Name = UserAppInfo.UserData.FullName;
+        base.OnNavigatedTo(args);
     }
 }

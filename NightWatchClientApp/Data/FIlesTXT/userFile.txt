@@ -1,0 +1,3 @@
+{"Id":1,"FullName":"Dania","Email":"d1","Password":"p1","TeamId":null,"IsPremium":false}
+{"Id":2,"FullName":"Dania","Email":"igor@login","Password":"p2","TeamId":null,"IsPremium":false}
+{"Id":3,"FullName":"d1","Email":"d1","Password":"d1","TeamId":null,"IsPremium":false}

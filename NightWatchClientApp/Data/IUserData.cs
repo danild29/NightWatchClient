@@ -4,6 +4,6 @@ namespace NightWatchClientApp.Data;
 
 public interface IUserData
 {
-    User Login(string username, string password);
-    bool Register(User user);
+    Task<ErrorModel> Login(UserLoginDto user);
+    Task<ErrorModel> Register(UserRegisterDto user);
 }

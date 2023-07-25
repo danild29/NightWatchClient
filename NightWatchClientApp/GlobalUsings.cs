@@ -5,3 +5,6 @@ global using NightWatchClientApp.Views;
 global using NightWatchClientApp.ViewModels;
 global using NightWatchClientApp.Helpers;
 global using CommunityToolkit.Mvvm.Input;
+global using NightWatchClientApp.DevsFeatures;
+
+global using NightWatchClientApp.Models.DTOs;

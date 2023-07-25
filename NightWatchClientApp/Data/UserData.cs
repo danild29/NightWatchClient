@@ -1,93 +1,109 @@
-﻿using NightWatchClientApp.DevsFeatures;
+﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Controls.Shapes;
+using NightWatchClientApp.DevsFeatures;
 using NightWatchClientApp.Models;
+using NightWatchClientApp.Models.DTOs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+
 
 namespace NightWatchClientApp.Data;
 
-public class UserData: IUserData
+public class UserData: IUserData, IDisposable
 {
-    private List<User> userList = new List<User>();
 
+    public readonly static string deviceAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
+    private readonly static string authAddress = deviceAddress + "/auth/";
+
+    public static readonly HttpClient _client = new HttpClient()
+    {
+        BaseAddress = new Uri(authAddress)
+    };
+
+    private JsonSerializerOptions CaseInsensitive = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
+    private int delay = 1000;
 
     public UserData()
     {
-        User user1 = new()
-        {
-            FullName = "Dania",
-            Email = "d1",
-            Id = 1,
-            Password = "p1"
-        };
-        userList.Add(user1);
-        User user2 = new()
-        {
-            FullName = "Dania",
-            Email = "igor@login",
-            Id = 2,
-            Password = "p2"
-        };
-        userList.Add(user2);
     }
 
-    public User Login(string email, string password)
+    public async Task<ErrorModel> Login(UserLoginDto user)
     {
-        foreach (var user in userList)
-        {
-            if (user.Email == email && user.Password == password)
-            {
+        await Task.Delay(delay);
 
-                return user;
-            }
+
+        string json = JsonSerializer.Serialize(user);
+
+        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _client.PostAsync("login", data);
+
+        string result = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+            var u = JsonSerializer.Deserialize<User>(result, CaseInsensitive);
+            UserAppInfo.UserData = u;
+            return null;
         }
-        return null;
+
+        var er = JsonSerializer.Deserialize<ErrorModel>(result, CaseInsensitive);
+        return er;
     }
 
-    public bool Register(User user)
+
+
+
+    public async Task<ErrorModel> Register(UserRegisterDto userDto)
     {
-        if(DevMain.IsDev)
+        await Task.Delay(delay);
+
+        string json = JsonSerializer.Serialize(userDto);
+
+        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await _client.PostAsync("register", data);
+
+        string result = await response.Content.ReadAsStringAsync();
+
+
+        if (response.IsSuccessStatusCode)
         {
-            AddUser(user);
-            return true;
+            var u = JsonSerializer.Deserialize<User>(result, CaseInsensitive);
+            UserAppInfo.UserData = u;
+            return null;
         }
-        return false;
+
+        try
+        {
+            var er = JsonSerializer.Deserialize<ErrorModel>(result, CaseInsensitive);
+            return er;
+        }
+        catch (Exception)
+        {
+            ErrorModel er = new ErrorModel();
+            er.message = result;
+            return er;
+        }
     }
 
 
-    public bool AddUser(User user)
+    //public async Task<ErrorModel> GetMe()
+    //{
+    //    //_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, token);
+    //    return null;
+    //}
+
+
+
+    public void Dispose()
     {
-        if (DevMain.IsDev)
-        {
-            userList.Add(user);
-            return true;
-        }
-        else
-        {
-
-        }
-
-        return false;
+        _client?.Dispose();
     }
-
-
-    public async Task<User> Get()
-    {    
-        return (await GetAll()).First();
-    }
-
-    public async Task<List<User>> GetAll()
-    {
-        if (DevMain.IsDev)
-        {
-            return userList;
-        }
-        else
-        {
-            throw new Exception();
-        }
-    }
-    
 }

@@ -21,7 +21,7 @@ public static class MauiProgram
 			.RegisterData()
 			.RegisterViewModels();
 
-		
+
 
 
 #if DEBUG
@@ -34,7 +34,7 @@ public static class MauiProgram
 
 	public static MauiAppBuilder RegisterData(this MauiAppBuilder mauiAppBuilder)
 	{
-		mauiAppBuilder.Services.AddSingleton<IUserData, UserDataDev>();
+		mauiAppBuilder.Services.AddSingleton<IUserData, UserData>();
 
 		return mauiAppBuilder;
 	}
