@@ -9,7 +9,7 @@ namespace NightWatchClientApp.ViewModels;
 public partial class ProfileViewModel: ObservableObject
 {
     [ObservableProperty]
-    public string name = UserAppInfo.UserData.FullName;
+    public string name = UserAppInfo.UserData.Name;
 
 
     public IUserData _userData { get; }
@@ -32,7 +32,7 @@ public partial class ProfileViewModel: ObservableObject
     [RelayCommand]
     private void GoToSettings()
     {
-        Name = UserAppInfo.UserData.FullName;
+        Name = UserAppInfo.UserData.Name;
     }
 
     [RelayCommand]

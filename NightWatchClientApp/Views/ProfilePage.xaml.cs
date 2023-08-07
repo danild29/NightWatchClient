@@ -11,7 +11,7 @@ public partial class ProfilePage : ContentPage
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        ServiceHelper.GetService<ProfileViewModel>().Name = UserAppInfo.UserData.FullName;
+        ServiceHelper.GetService<ProfileViewModel>().Name = UserAppInfo.UserData.Name;
         base.OnNavigatedTo(args);
     }
 }

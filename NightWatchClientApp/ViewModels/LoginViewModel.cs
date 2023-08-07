@@ -19,7 +19,8 @@ public partial class LoginViewModel : ObservableObject
 
     public IUserData _userData { get; }
 
-    public LoginViewModel(IUserData userData) {
+    public LoginViewModel(IUserData userData) 
+    {
         _userData = userData;
 
     }
@@ -73,18 +74,26 @@ public partial class LoginViewModel : ObservableObject
         IsBusy = true;
 
         UserLoginDto user = new(UserLoginName, UserPassword);
-
-        ErrorModel er = await _userData.Login(user);
-        if (er == null)
+        try
         {
-            Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(user));
-            await Shell.Current.GoToAsync("//MainPage");
+            ErrorModel er = await _userData.Login(user);
+            if (er == null)
+            {
+                Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(user));
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+            else
+            {
+                LoginMessage = er.message;
+                TurnLoginMessage = true;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            LoginMessage = er.message;
+            LoginMessage = ex.Message;
             TurnLoginMessage = true;
         }
+        
 
         IsBusy = false;
     }
@@ -93,6 +102,7 @@ public partial class LoginViewModel : ObservableObject
     [RelayCommand]
     private void GoToCreateAccount(object obj)
     {
+        // obj is null?
         Shell.Current.GoToAsync(nameof(CreateAccountPage));
     }
 

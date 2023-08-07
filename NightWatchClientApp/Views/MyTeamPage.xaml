@@ -2,12 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NightWatchClientApp.Views.MyTeamPage"
-             Title="MyTeamPage"
+             xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
+             x:DataType="vm:MyTeamViewModel"
              NavigationPage.HasNavigationBar="false">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to my team!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            
+
+            <StackLayout IsVisible="{Binding HasNoTeam}" Margin="10,20,10,10">
+                <StackLayout Margin="10, 20,10,10">
+                    <Entry Placeholder="id команды" Text="{Binding NewTeamId} "/>
+                    <Entry Placeholder="пароль команды" Text="{Binding NewTeamPassword}"/>
+                    <Button Text="войти" Command="{Binding LogInTeamCommand}"/>
+                </StackLayout>
+
+                <StackLayout Margin="10, 220,10,10">
+                    <Label Text="создать команду" FontSize="20"/>
+                    <Entry Placeholder="название команды" Text="{Binding CreateTeamName} "/>
+                    <Entry Placeholder="пароль команды" Text="{Binding CreateTeamPassword}"/>
+                    <Button Text="создать" Command="{Binding CreateTeamCommand}"/>
+                </StackLayout>
+                <Label Text="{Binding ErrorMessage}"/>
+            </StackLayout>
+
+
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            <!--   моя команда -->
+            <!--<StackLayout Orientation="Vertical" Margin="10,100, 0,0" IsVisible="{Binding HasTeam}">
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Выйти" Clicked="LeaveTeam"/>
+                    <Label Text="{Binding IdTeam}"/>
+                    <Label Text="{Binding Name}"/>
+                </StackLayout>
+
+
+                <StackLayout>
+
+                    <ListView x:Name="myTeamatesList" x:FieldModifier="public"  SeparatorColor="Red"   ItemTapped="myTeamates_ItemTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+
+                                    <Label Text="{Binding NickName}"
+                                        TextColor="Beige"
+                                        FontAttributes="Bold"
+                                           FontSize="10"/>
+
+
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                    <Button Text="начать игру" Clicked="StartGame" />
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToMyTeam" CommandParameter="." />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>-->
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

@@ -31,6 +31,7 @@ public partial class CreateAccountViewModel : ObservableObject
     [RelayCommand]
     private async Task RegisterNewUser()
     {
+        TurnLoginMessage = false;
         IsBusy = true;
         UserRegisterDto user = new UserRegisterDto(UserLoginName, UserPassword, UserNickName);
 

@@ -6,5 +6,4 @@ using System.Threading.Tasks;
 
 namespace NightWatchClientApp.Models.DTOs;
 
-
-public record UserLoginDto(string name, string password);
+public record TeamCreateDto(string teamName, string password);

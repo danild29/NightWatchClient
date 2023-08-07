@@ -4,7 +4,6 @@
              x:Class="NightWatchClientApp.Views.EventDetailsPage"
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
              x:DataType="vm:EventDetailsViewModel"
-             Title="EventDetailsPage"
              NavigationPage.HasNavigationBar="false">
     
     <ContentPage.Content>

@@ -14,10 +14,6 @@ public partial class EventDetailsViewModel: ObservableObject
     private EventModel eventModel;
 
 
-
-
-
-
     public EventDetailsViewModel()
     {
     }

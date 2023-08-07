@@ -16,17 +16,14 @@ public class UserData: IUserData, IDisposable
 {
 
     public readonly static string deviceAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
-    private readonly static string authAddress = deviceAddress + "/auth/";
+    private readonly static string address = deviceAddress + "/auth/";
 
     public static readonly HttpClient _client = new HttpClient()
     {
-        BaseAddress = new Uri(authAddress)
+        BaseAddress = new Uri(address)
     };
 
-    private JsonSerializerOptions CaseInsensitive = new JsonSerializerOptions
-    {
-        PropertyNameCaseInsensitive = true
-    };
+    private JsonSerializerOptions CaseInsensitive = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
     private int delay = 1000;
 

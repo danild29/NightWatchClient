@@ -39,17 +39,17 @@ public class UserDataDev : IUserData
 
             User user1 = new()
             {
-                FullName = "Dania",
+                Name = "Dania",
                 Email = "d1",
-                _Id = "1",
+                Id = "1",
                 Password = "p1"
             };
             userList.Add(user1);
             User user2 = new()
             {
-                FullName = "Dania",
+                Name = "Dania",
                 Email = "igor@login",
-                _Id = "2",
+                Id = "2",
                 Password = "p2"
             };
             userList.Add(user2);
@@ -71,7 +71,7 @@ public class UserDataDev : IUserData
     {
         foreach (var user in userList)
         {
-            if (user.Email == userToFind.email && user.Password == userToFind.password)
+            if (user.Email == userToFind.name && user.Password == userToFind.password)
             {
                 UserAppInfo.UserData = user;
                 return null;
@@ -84,8 +84,8 @@ public class UserDataDev : IUserData
 
     public async Task<ErrorModel> Register(UserRegisterDto newUser)
     {
-        var user = new User(newUser.email, newUser.password, newUser.fullName);
-        user._Id = (userList.Count + 1).ToString();
+        var user = new User(newUser.email, newUser.password, newUser.name);
+        user.Id = (userList.Count + 1).ToString();
         userList.Add(user);
         List<string> file = new();
         foreach (User u in userList)

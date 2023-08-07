@@ -27,7 +27,7 @@
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
                     <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
 
-                    <Entry Text="{Binding UserLoginName}" Placeholder="Логин" HorizontalOptions="FillAndExpand"/>
+                    <Entry Text="{Binding UserLoginName}" Placeholder="Логин(по желанию)" HorizontalOptions="FillAndExpand"/>
 
                 </StackLayout>
             </Frame>
