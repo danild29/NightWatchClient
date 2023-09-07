@@ -17,7 +17,7 @@
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
                     <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
 
-                    <Entry  Text="{Binding UserNickName}" Placeholder="имя пользователя" 
+                        <Entry TextColor="White" Text="{Binding UserNickName}" Placeholder="имя пользователя" 
                              HorizontalOptions="FillAndExpand"/>
 
                 </StackLayout>
@@ -27,7 +27,7 @@
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
                     <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
 
-                    <Entry Text="{Binding UserLoginName}" Placeholder="Логин(по желанию)" HorizontalOptions="FillAndExpand"/>
+                        <Entry TextColor="White" Text="{Binding UserLoginName}" Placeholder="Логин(по желанию)" HorizontalOptions="FillAndExpand"/>
 
                 </StackLayout>
             </Frame>
@@ -37,7 +37,7 @@
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
                     <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
 
-                    <Entry IsPassword="True" Text="{Binding UserPassword}" Placeholder="Пароль"  HorizontalOptions="FillAndExpand"/>
+                        <Entry TextColor="White" IsPassword="True" Text="{Binding UserPassword}" Placeholder="Пароль"  HorizontalOptions="FillAndExpand"/>
 
                 </StackLayout>
             </Frame>

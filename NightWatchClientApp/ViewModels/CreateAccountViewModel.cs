@@ -38,7 +38,7 @@ public partial class CreateAccountViewModel : ObservableObject
         ErrorModel er = await _userData.Register(user);
         if (er == null)
         {
-            UserLoginDto u = new UserLoginDto(UserLoginName, UserPassword);
+            UserLoginDto u = new UserLoginDto(UserNickName, UserPassword);
             Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(u));
 
             await Shell.Current.GoToAsync("//MainPage");

@@ -13,8 +13,8 @@ public partial class MyTeamViewModel: ObservableObject
     [ObservableProperty] private string errorMessage = string.Empty;
     [ObservableProperty] private bool turnLoginMessage = false;
 
-    [ObservableProperty] private string newTeamId;
-    [ObservableProperty] private string newTeamPassword;
+    [ObservableProperty] private string logTeamId;
+    [ObservableProperty] private string logTeamPassword;
 
     [ObservableProperty] private string createTeamName;
     [ObservableProperty] private string createTeamPassword;
@@ -31,7 +31,7 @@ public partial class MyTeamViewModel: ObservableObject
 
 
     [ObservableProperty]
-    private EventModel teamModel;
+    private Team teamModel;
 
 
     public ITeamData _data { get; }
@@ -57,19 +57,21 @@ public partial class MyTeamViewModel: ObservableObject
     [RelayCommand]    
     private async Task CreateTeam()
     {
-        //TeamCreateDto team = new(CreateTeamName, CreateTeamPassword);
+        TeamCreateDto team = new(CreateTeamName, CreateTeamPassword);
 
-        //ErrorModel er = await _data.CreateTeam(team);
+        ErrorModel er = await _data.CreateTeam(team);
 
-        //if (er == null)
-        //{
-        //    Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(user));
-        //}
-        //else
-        //{
-        //    ErrorMessage = er.message;
-        //    TurnLoginMessage = true;
-        //}
+        if (er == null)
+        {
+            Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(team));
+            TeamModel = UserAppInfo.TeamData;
+            HasTeam = true;
+        }
+        else
+        {
+            ErrorMessage = er.message;
+            TurnLoginMessage = true;
+        }
     }
 
 

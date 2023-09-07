@@ -35,6 +35,7 @@ public static class MauiProgram
 	public static MauiAppBuilder RegisterData(this MauiAppBuilder mauiAppBuilder)
 	{
 		mauiAppBuilder.Services.AddSingleton<IUserData, UserData>();
+		mauiAppBuilder.Services.AddSingleton<ITeamData, TeamData>();
 
 		return mauiAppBuilder;
 	}

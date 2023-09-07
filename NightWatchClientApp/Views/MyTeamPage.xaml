@@ -12,8 +12,8 @@
 
             <StackLayout IsVisible="{Binding HasNoTeam}" Margin="10,20,10,10">
                 <StackLayout Margin="10, 20,10,10">
-                    <Entry Placeholder="id команды" Text="{Binding NewTeamId} "/>
-                    <Entry Placeholder="пароль команды" Text="{Binding NewTeamPassword}"/>
+                    <Entry Placeholder="id команды" Text="{Binding LogTeamId} "/>
+                    <Entry Placeholder="пароль команды" Text="{Binding LogTeamPassword}"/>
                     <Button Text="войти" Command="{Binding LogInTeamCommand}"/>
                 </StackLayout>
 
@@ -29,26 +29,26 @@
 
 
 
-            
-            
-            
-            
-            
-            
-            
-            
             <!--   моя команда -->
-            <!--<StackLayout Orientation="Vertical" Margin="10,100, 0,0" IsVisible="{Binding HasTeam}">
-                <StackLayout Orientation="Horizontal">
-                    <Button Text="Выйти" Clicked="LeaveTeam"/>
-                    <Label Text="{Binding IdTeam}"/>
-                    <Label Text="{Binding Name}"/>
+            <StackLayout Orientation="Vertical" Margin="10,100, 0,0" IsVisible="{Binding HasTeam}">
+                <StackLayout Orientation="Vertical">
+                    <!--<Button Text="Выйти" Clicked="LeaveTeam"/>-->
+                    <Label Text="Ваша команда :"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="имя-"/>
+                        <Label Text="{Binding TeamModel.TeamName}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="пароль-"/>
+                        <Label Text="{Binding TeamModel.Password}"/>
+                    </StackLayout>
+
                 </StackLayout>
 
 
-                <StackLayout>
+                <!--<StackLayout>
 
-                    <ListView x:Name="myTeamatesList" x:FieldModifier="public"  SeparatorColor="Red"   ItemTapped="myTeamates_ItemTapped">
+                    --><!--<ListView x:Name="myTeamatesList" x:FieldModifier="public"  SeparatorColor="Red"   ItemTapped="myTeamates_ItemTapped">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell >
@@ -63,15 +63,15 @@
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
+                    </ListView>--><!--
 
 
                     <Button Text="начать игру" Clicked="StartGame" />
                 </StackLayout>
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="GoToMyTeam" CommandParameter="." />
-                </StackLayout.GestureRecognizers>
-            </StackLayout>-->
+                </StackLayout.GestureRecognizers>-->
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

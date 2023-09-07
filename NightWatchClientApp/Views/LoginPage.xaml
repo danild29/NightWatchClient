@@ -16,7 +16,7 @@
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
                     <Image VerticalOptions="Center" Source="envelope" HeightRequest="20" Margin="0,0,10,0"/>
 
-                    <Entry Text="{Binding UserLoginName}" 
+                    <Entry TextColor="White" Text="{Binding UserLoginName}" 
                            Placeholder="Имя пользователя" HorizontalOptions="FillAndExpand"/>
 
                  
@@ -27,7 +27,7 @@
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
                     <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
 
-                    <Entry IsPassword="True" Text="{Binding UserPassword}" 
+                        <Entry TextColor="White" IsPassword="True" Text="{Binding UserPassword}" 
                            Placeholder="Пароль" HorizontalOptions="FillAndExpand"/>
 
                 </StackLayout>
