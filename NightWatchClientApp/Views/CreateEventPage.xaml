@@ -4,7 +4,6 @@
              x:Class="NightWatchClientApp.Views.CreateEventPage"
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
              xmlns:m="clr-namespace:NightWatchClientApp.Models"
-             
              x:DataType="vm:CreateEventViewModel"
              Shell.NavBarIsVisible="false">
 
@@ -21,13 +20,9 @@
             </StackLayout>
 
             <StackLayout   Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-
-
                 <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
-
                     <Entry TextColor="White" Text="{Binding EventName}" Placeholder="name of event" HorizontalOptions="FillAndExpand"/>
                     <Entry TextColor="White" Text="{Binding EventDescription}" Placeholder="описание of event" HorizontalOptions="FillAndExpand"/>
-
                 </StackLayout>
                 <Button Text="создать" Command="{Binding CreateEventCommand}"/>
                 
@@ -39,12 +34,7 @@
             </StackLayout>
 
 
-
-
             <Grid RowDefinitions="*" ColumnDefinitions="*" IsVisible="{Binding HaveEvent}">
-
-
-
 
                 <CollectionView ItemsSource="{Binding ManagedEvents}"  SelectionMode="None" HeightRequest="650" 
                                     Grid.Row="0" Grid.Column="0">
@@ -57,14 +47,11 @@
                         <DataTemplate x:DataType="m:EventModel">
                             <Frame MinimumHeightRequest="315">
 
-                               
-
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateEventViewModel}}, Path=GoToManageEventCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>
-
 
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="название=" FontSize="24" FontFamily="RobotoBold" />

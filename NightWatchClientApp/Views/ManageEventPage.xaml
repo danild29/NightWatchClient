@@ -29,9 +29,6 @@
 
         <Grid RowDefinitions="*" ColumnDefinitions="*">
 
-
-
-
             <CollectionView ItemsSource="{Binding EventModel.questions}"  SelectionMode="None" HeightRequest="650" 
                                     Grid.Row="0" Grid.Column="0">
 
@@ -42,13 +39,6 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:TaskModel">
                         <Frame MinimumHeightRequest="315">
-
-                            <!--<Frame.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
-                                            CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>-->
-
 
 
                             <StackLayout Orientation="Horizontal">

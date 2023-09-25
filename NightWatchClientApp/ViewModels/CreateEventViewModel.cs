@@ -56,7 +56,6 @@ public partial class CreateEventViewModel: ObservableObject
     {
         try
         {
-            
             var e = await _eventData.CreateEvent(EventName, EventDescription);
 
             AquiredEvent(true);
