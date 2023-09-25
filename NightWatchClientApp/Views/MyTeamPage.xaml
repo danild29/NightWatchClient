@@ -4,6 +4,7 @@
              x:Class="NightWatchClientApp.Views.MyTeamPage"
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
              x:DataType="vm:MyTeamViewModel"
+             xmlns:m="clr-namespace:NightWatchClientApp.Models"
              NavigationPage.HasNavigationBar="false">
     
     <ContentPage.Content>
@@ -12,7 +13,7 @@
 
             <StackLayout IsVisible="{Binding HasNoTeam}" Margin="10,20,10,10">
                 <StackLayout Margin="10, 20,10,10">
-                    <Entry Placeholder="id команды" Text="{Binding LogTeamId} "/>
+                    <Entry Placeholder="id команды" Text="{Binding LogTeamName} "/>
                     <Entry Placeholder="пароль команды" Text="{Binding LogTeamPassword}"/>
                     <Button Text="войти" Command="{Binding LogInTeamCommand}"/>
                 </StackLayout>
@@ -21,31 +22,92 @@
                     <Label Text="создать команду" FontSize="20"/>
                     <Entry Placeholder="название команды" Text="{Binding CreateTeamName} "/>
                     <Entry Placeholder="пароль команды" Text="{Binding CreateTeamPassword}"/>
-                    <Button Text="создать" Command="{Binding CreateTeamCommand}"/>
                 </StackLayout>
                 <Label Text="{Binding ErrorMessage}"/>
             </StackLayout>
 
 
 
-
             <!--   моя команда -->
             <StackLayout Orientation="Vertical" Margin="10,100, 0,0" IsVisible="{Binding HasTeam}">
+                <Button Text="log out" Command="{Binding LogOutTeamCommand}"/>
                 <StackLayout Orientation="Vertical">
                     <!--<Button Text="Выйти" Clicked="LeaveTeam"/>-->
                     <Label Text="Ваша команда :"/>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="имя-"/>
-                        <Label Text="{Binding TeamModel.TeamName}"/>
+                        <Label Text="{Binding TeamModel.teamName}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="пароль-"/>
-                        <Label Text="{Binding TeamModel.Password}"/>
+                        <Label Text="{Binding TeamModel.password}"/>
                     </StackLayout>
 
+                    <Label Text="{Binding TeamModel.members.Count}"/>
                 </StackLayout>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
 
+                    <!--<Image Source="{Binding Name}" Aspect="AspectFill"/>-->
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="AUTO" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Text="{Binding TeamModel.captain.Name}" FontSize="24" FontFamily="RobotoBold" />
+                        <Label Grid.Row="1" Text="{Binding TeamModel.captain.EMail}" FontSize="24" FontFamily="RobotoBold" />
+
+                    </Grid>
+                </Grid>
+                <RefreshView>
+                    <!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">-->
+                <CollectionView ItemsSource="{Binding TeamModel.members}" SelectionMode="None" >
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:User">
+                            <Frame MinimumHeightRequest="315">
+                                
+                                <!--<Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>-->
+                                
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                
+                                    <!--<Image Source="{Binding Name}" Aspect="AspectFill"/>-->
+
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="AUTO" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Grid.Row="1" Text="{Binding EMail}" FontSize="24" FontFamily="RobotoBold" />
+                                    
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
                 <!--<StackLayout>
 
                     --><!--<ListView x:Name="myTeamatesList" x:FieldModifier="public"  SeparatorColor="Red"   ItemTapped="myTeamates_ItemTapped">

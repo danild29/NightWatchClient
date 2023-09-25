@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NightWatchClientApp.Data;
 using NightWatchClientApp.Models;
 using NightWatchClientApp.Views;
 using Microsoft.Maui.ApplicationModel.Communication;
 using System.Text.Json;
+using NightWatchClientApp.Data.Services;
 
 namespace NightWatchClientApp.ViewModels;
 

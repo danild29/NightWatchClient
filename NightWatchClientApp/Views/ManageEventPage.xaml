@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NightWatchClientApp.ViewModels.ManageEventPage"
+             xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
+             xmlns:m="clr-namespace:NightWatchClientApp.Models"
+             x:DataType="vm:ManageEventViewModel"
+             Shell.NavBarIsVisible="false">
+
+
+
+    <StackLayout>
+        <Label TextColor="White" Text="{Binding ErrorMessage}" HorizontalOptions="FillAndExpand"/>
+
+        <StackLayout VerticalOptions="Center" >
+
+
+            <StackLayout Orientation="Vertical"  BackgroundColor="#02040F" >
+
+                <Label TextColor="White" Text="{Binding EventModel.name}"/>
+                <Label TextColor="White" Text="{Binding EventModel.description}" />
+
+            </StackLayout>
+        </StackLayout>
+        <Label Margin="30" Text="вопросы: " FontSize="24" FontFamily="RobotoBold" />
+
+
+
+
+        <Grid RowDefinitions="*" ColumnDefinitions="*">
+
+
+
+
+            <CollectionView ItemsSource="{Binding EventModel.questions}"  SelectionMode="None" HeightRequest="650" 
+                                    Grid.Row="0" Grid.Column="0">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:TaskModel">
+                        <Frame MinimumHeightRequest="315">
+
+                            <!--<Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>-->
+
+
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="вопрос: " FontSize="24" FontFamily="RobotoBold" />
+                                <Label Text="{Binding question}" FontSize="24" FontFamily="RobotoBold" />
+                                <Label Text="     ответ:" FontSize="24" FontFamily="RobotoBold" />
+                                <Label Text="{Binding answer}" FontSize="24" FontFamily="RobotoBold" />
+
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+
+
+            <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F">
+
+                <Entry TextColor="White" Text="{Binding NewQuestion.question}" Placeholder="вопрос" HorizontalOptions="FillAndExpand"/>
+                <Entry TextColor="White" Text="{Binding NewQuestion.answer}" Placeholder="ответ" HorizontalOptions="FillAndExpand"/>
+                <Entry TextColor="White" Text="{Binding NewQuestion.clue}" Placeholder="посказка" HorizontalOptions="FillAndExpand"/>
+
+            </StackLayout>
+            <Button Text="создать" Command="{Binding CreateTaskCommand}"/>
+        </StackLayout>
+
+
+
+    </StackLayout>
+
+</ContentPage>

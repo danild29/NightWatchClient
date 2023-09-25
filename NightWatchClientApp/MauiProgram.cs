@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using NightWatchClientApp.Data;
+using NightWatchClientApp.Data.Services;
 using NightWatchClientApp.ViewModels;
 
 namespace NightWatchClientApp;
@@ -36,6 +36,7 @@ public static class MauiProgram
 	{
 		mauiAppBuilder.Services.AddSingleton<IUserData, UserData>();
 		mauiAppBuilder.Services.AddSingleton<ITeamData, TeamData>();
+		mauiAppBuilder.Services.AddSingleton<IEventData, EventData>();
 
 		return mauiAppBuilder;
 	}
@@ -47,6 +48,8 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<MyTeamViewModel>();
         mauiAppBuilder.Services.AddSingleton<AllEventsViewModel>();
         mauiAppBuilder.Services.AddSingleton<EventDetailsViewModel>();
+        mauiAppBuilder.Services.AddSingleton<CreateEventViewModel>();
+        mauiAppBuilder.Services.AddSingleton<ManageEventViewModel>();
 
         return mauiAppBuilder;
     }

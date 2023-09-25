@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NightWatchClientApp.Views.CreateEventPage"
+             xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
+             xmlns:m="clr-namespace:NightWatchClientApp.Models"
+             
+             x:DataType="vm:CreateEventViewModel"
+             Shell.NavBarIsVisible="false">
+
+    <ContentPage.Content>
+        
+        <StackLayout Padding="20">
+            <Label TextColor="White" Text="{Binding Error}" HorizontalOptions="FillAndExpand"/>
+            <ActivityIndicator IsRunning="False" />
+            
+            <StackLayout IsVisible="{Binding NoHaveEvent}"  Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+
+                <Label Text="создайте свой первый ивент"/>
+
+            </StackLayout>
+
+            <StackLayout   Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+
+
+                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
+
+                    <Entry TextColor="White" Text="{Binding EventName}" Placeholder="name of event" HorizontalOptions="FillAndExpand"/>
+                    <Entry TextColor="White" Text="{Binding EventDescription}" Placeholder="описание of event" HorizontalOptions="FillAndExpand"/>
+
+                </StackLayout>
+                <Button Text="создать" Command="{Binding CreateEventCommand}"/>
+                
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
+                <Button Text="обновить" Command="{Binding LoadEventsCommand}"/>
+            </StackLayout>
+
+
+
+
+            <Grid RowDefinitions="*" ColumnDefinitions="*" IsVisible="{Binding HaveEvent}">
+
+
+
+
+                <CollectionView ItemsSource="{Binding ManagedEvents}"  SelectionMode="None" HeightRequest="650" 
+                                    Grid.Row="0" Grid.Column="0">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:EventModel">
+                            <Frame MinimumHeightRequest="315">
+
+                               
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateEventViewModel}}, Path=GoToManageEventCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="название=" FontSize="24" FontFamily="RobotoBold" />
+                                    <Label Text="{Binding name}" FontSize="24" FontFamily="RobotoBold" />
+                                    <Label Text="    айди=" FontSize="24" FontFamily="RobotoBold" />
+                                    <Label Text="{Binding _id}" FontSize="24" FontFamily="RobotoBold" />
+
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

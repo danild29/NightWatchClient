@@ -26,5 +26,8 @@
         <Tab Title="профиль" >
             <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" />
         </Tab>
+        <Tab Title="создать ивент" > 
+            <ShellContent ContentTemplate="{DataTemplate v:CreateEventPage}" />
+        </Tab>
     </TabBar>
 </Shell>

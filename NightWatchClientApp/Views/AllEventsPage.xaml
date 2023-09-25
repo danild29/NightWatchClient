@@ -11,7 +11,7 @@
     <ContentPage.Content>
 
         <StackLayout>
-
+            <Label Text="{Binding ErrorMessage}" />
 
             <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">
                 <CollectionView ItemsSource="{Binding EventList}" SelectionMode="None" >
@@ -44,8 +44,8 @@
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
 
-                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="24" FontFamily="RobotoBold" />
-                                        <Label Grid.Row="1" Text="{Binding Description}" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Grid.Row="0" Text="{Binding name}" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Grid.Row="1" Text="{Binding description}" FontSize="24" FontFamily="RobotoBold" />
                                     
                                     </Grid>
                                 </Grid>

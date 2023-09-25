@@ -10,9 +10,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 
-namespace NightWatchClientApp.Data;
+namespace NightWatchClientApp.Data.Services;
 
-public class UserData: IUserData, IDisposable
+public class UserData : IUserData, IDisposable
 {
 
     public readonly static string deviceAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
@@ -59,7 +59,6 @@ public class UserData: IUserData, IDisposable
 
     public async Task<ErrorModel> Register(UserRegisterDto userDto)
     {
-        await Task.Delay(delay);
 
         string json = JsonSerializer.Serialize(userDto);
 
@@ -91,10 +90,20 @@ public class UserData: IUserData, IDisposable
     }
 
 
-    //public async Task<ErrorModel> GetMe()
+    //public async Task GetVip(UserRegisterDto userDto)
     //{
-    //    //_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, token);
-    //    return null;
+    //    string json = JsonSerializer.Serialize(userDto);
+
+    //    StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+    //    HttpResponseMessage response = await _client.PostAsync("register", data);
+
+    //    string result = await response.Content.ReadAsStringAsync();
+    //http://localhost:5000/auth/giverole/:userId - выдать привилегию (put)
+    //    {
+    //        "role" : "vip"
+
+    //}
     //}
 
 

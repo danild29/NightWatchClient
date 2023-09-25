@@ -10,8 +10,7 @@ namespace NightWatchClientApp.ViewModels;
 [QueryProperty(nameof(EventModel), nameof(EventModel))]
 public partial class EventDetailsViewModel: ObservableObject
 {
-    [ObservableProperty]
-    private EventModel eventModel;
+    [ObservableProperty] private EventModel eventModel;
 
 
     public EventDetailsViewModel()

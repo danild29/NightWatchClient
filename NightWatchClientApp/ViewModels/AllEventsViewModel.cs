@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NightWatchClientApp.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,14 +11,16 @@ namespace NightWatchClientApp.ViewModels;
 public partial class AllEventsViewModel: ObservableObject
 {
 
-    [ObservableProperty]
-    private List<EventModel> eventList;
-    [ObservableProperty]
-    public bool isRefreshing = false;
+    [ObservableProperty] private List<EventModel> eventList;
+    [ObservableProperty] public bool isRefreshing = false;
+    [ObservableProperty] public string errorMessage = "";
 
-    public AllEventsViewModel()
+    private readonly IEventData _eventData;
+
+    public AllEventsViewModel(IEventData eventData)
     {
-        LoadEvents();
+        _ = LoadEvents();
+        _eventData = eventData;
 
     }
 
@@ -28,24 +31,26 @@ public partial class AllEventsViewModel: ObservableObject
         try
         {
             await Task.Delay(1000);
-            var image = "https://avatars.mds.yandex.net/i?id=0bd48196c8a84bedbb1aa839e70cf91916235a61-7570837-images-thumbs&n=13";
-            EventList = new()
-            {
-                new EventModel(
-                    Name: "First",
-                    Desciption: "firstEvent",
-                    Image: image),
-                new EventModel(
-                    Name: "Second",
-                    Desciption: "secondEvent",
-                    Image: image),
+            //var image = "https://avatars.mds.yandex.net/i?id=0bd48196c8a84bedbb1aa839e70cf91916235a61-7570837-images-thumbs&n=13";
+            //EventList = new()
+            //{
+            //    new EventModel(
+            //        Name: "First",
+            //        Desciption: "firstEvent",
+            //        Image: image),
+            //    new EventModel(
+            //        Name: "Second",
+            //        Desciption: "secondEvent",
+            //        Image: image),
 
-            };
+            //};
+
+            EventList = await _eventData.GetAllEvents();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
 
-            throw;
+            ErrorMessage = ex.Message;
         }
         finally
         {

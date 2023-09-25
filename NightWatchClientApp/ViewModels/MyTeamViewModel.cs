@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NightWatchClientApp.Data.Services;
+using NightWatchClientApp.Data.Settings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,7 @@ public partial class MyTeamViewModel: ObservableObject
     [ObservableProperty] private string errorMessage = string.Empty;
     [ObservableProperty] private bool turnLoginMessage = false;
 
-    [ObservableProperty] private string logTeamId;
+    [ObservableProperty] private string logTeamName;
     [ObservableProperty] private string logTeamPassword;
 
     [ObservableProperty] private string createTeamName;
@@ -34,25 +36,88 @@ public partial class MyTeamViewModel: ObservableObject
     private Team teamModel;
 
 
+
     public ITeamData _data { get; }
+    private BackgroundTask updater;
+    TimeSpan interval = GlobalSettings.IntervalForUpdatingTeam;
 
     public MyTeamViewModel(ITeamData data)
     {
         _data = data;
+        updater = new(interval);
+
+        if(DataSaver.GetFromDevice<Team>() is not null)
+        {
+            updater.Start(Update);
+        }
+    }
+    private async void Update(CancellationToken ct)
+    {
+        try
+        {
+            if (UserAppInfo.TeamData == null)
+            {
+                UserAppInfo.TeamData = DataSaver.GetFromDevice<Team>();
+            }
+
+            if (await _data.UpdateTeam(ct) == false) return;
+
+            DataSaver.SaveToDevice(UserAppInfo.TeamData);
+            TeamModel = UserAppInfo.TeamData;
+            HasTeam = true;
+        }
+        catch (OperationCanceledException)
+        { 
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+            TurnLoginMessage = true;
+        }
     }
 
     [RelayCommand]
     private async Task LogInTeam()
     {
-        
+        TeamCreateDto team = new(LogTeamName, LogTeamPassword);
+
+        ErrorModel er = await _data.JoinTeam(team);
+
+        if (er == null)
+        {
+            DataSaver.SaveToDevice(team);
+            TeamModel = UserAppInfo.TeamData;
+            HasTeam = true;
+            updater.Start(Update);
+        }
+        else
+        {
+            ErrorMessage = er.message;
+            TurnLoginMessage = true;
+        }
 
     }
 
 
+    [RelayCommand]
+    private async Task LogOutTeam()
+    {
 
+        try
+        {
+            await _data.LogOutTeam();
+            UserAppInfo.TeamData = null;
+            HasTeam = false;
+            await updater.StopTask();
+        }
+        catch (Exception ex)
+        {
 
+            ErrorMessage = ex.Message;
+            TurnLoginMessage = true;
+        }    
 
-
+    }
 
     [RelayCommand]    
     private async Task CreateTeam()
@@ -63,9 +128,10 @@ public partial class MyTeamViewModel: ObservableObject
 
         if (er == null)
         {
-            Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(team));
+            DataSaver.SaveToDevice(team);
             TeamModel = UserAppInfo.TeamData;
             HasTeam = true;
+            updater.Start(Update);
         }
         else
         {
@@ -73,7 +139,6 @@ public partial class MyTeamViewModel: ObservableObject
             TurnLoginMessage = true;
         }
     }
-
 
 
 
@@ -92,8 +157,8 @@ public partial class MyTeamViewModel: ObservableObject
     //private void StartGame(object sender, EventArgs e)
     //{
 
-        
+
     //}
 
-        
+
 }

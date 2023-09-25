@@ -9,9 +9,9 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             
-            <Label Text="{Binding EventModel.Id}" />
-            <Label Text="{Binding EventModel.Name}" />
-            <Label Text="{Binding EventModel.Description}" />
+            <Label Text="{Binding EventModel._id}" />
+            <Label Text="{Binding EventModel.name}" />
+            <Label Text="{Binding EventModel.description}" />
 
 
             <Button Text="зарегаться" Command="{Binding JoinEventCommand}"/>

@@ -1,6 +1,6 @@
 ﻿using NightWatchClientApp.Models;
 
-namespace NightWatchClientApp.Data;
+namespace NightWatchClientApp.Data.Services;
 
 public interface IUserData
 {

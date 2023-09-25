@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NightWatchClientApp.Data.Services;
 
 namespace NightWatchClientApp.ViewModels;
 
 public partial class ProfileViewModel: ObservableObject
 {
-    [ObservableProperty]
-    public string name = UserAppInfo.UserData.Name;
+    [ObservableProperty] public string name = UserAppInfo.UserData.Name;
+
 
 
     public IUserData _userData { get; }
@@ -44,13 +45,14 @@ public partial class ProfileViewModel: ObservableObject
     [RelayCommand]
     private void GetPremium()
     {
-        if (UserAppInfo.UserData.IsPremium == true)
+
+        if (UserAppInfo.UserData.roles.Contains("vip"))
         {
             App.Current.MainPage.DisplayAlert("уже есть", "уже есть", "ok");
         }
         else
         {
-            UserAppInfo.UserData.IsPremium = true;
+            App.Current.MainPage.DisplayAlert("нету", "нету", "ok");
         }
     }
 }
