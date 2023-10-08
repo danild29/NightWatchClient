@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NightWatchClientApp.Views.MyTeamPage"
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
-             x:DataType="vm:MyTeamViewModel"
              xmlns:m="clr-namespace:NightWatchClientApp.Models"
+             x:DataType="vm:MyTeamViewModel"
              NavigationPage.HasNavigationBar="false">
     
     <ContentPage.Content>
         <StackLayout>
-            
 
+            <Label Text="{Binding ErrorMessage}" FontSize="30"/>
             <StackLayout IsVisible="{Binding HasNoTeam}" Margin="10,20,10,10">
                 <StackLayout Margin="10, 20,10,10">
                     <Entry Placeholder="id команды" Text="{Binding LogTeamName} "/>
@@ -22,6 +22,7 @@
                     <Label Text="создать команду" FontSize="20"/>
                     <Entry Placeholder="название команды" Text="{Binding CreateTeamName} "/>
                     <Entry Placeholder="пароль команды" Text="{Binding CreateTeamPassword}"/>
+                    <Button Text="создать" Command="{Binding CreateTeamCommand}"/>
                 </StackLayout>
                 <Label Text="{Binding ErrorMessage}"/>
             </StackLayout>
@@ -29,7 +30,14 @@
 
 
             <!--   моя команда -->
-            <StackLayout Orientation="Vertical" Margin="10,100, 0,0" IsVisible="{Binding HasTeam}">
+            <StackLayout Orientation="Vertical" Margin="10,20, 0,0" IsVisible="{Binding HasTeam}">
+
+                <StackLayout>
+                    <Label Text="вы записаны на мероприятие : "/>
+                    <Label Text="{Binding TeamModel.eventName}"/>
+                </StackLayout>
+                
+                <Button Text="play" Command="{Binding GoPlayCommand}"/>
                 <Button Text="log out" Command="{Binding LogOutTeamCommand}"/>
                 <StackLayout Orientation="Vertical">
                     <!--<Button Text="Выйти" Clicked="LeaveTeam"/>-->
@@ -108,31 +116,8 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-                <!--<StackLayout>
-
-                    --><!--<ListView x:Name="myTeamatesList" x:FieldModifier="public"  SeparatorColor="Red"   ItemTapped="myTeamates_ItemTapped">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell >
-
-                                    <Label Text="{Binding NickName}"
-                                        TextColor="Beige"
-                                        FontAttributes="Bold"
-                                           FontSize="10"/>
-
-
-
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>--><!--
-
-
-                    <Button Text="начать игру" Clicked="StartGame" />
-                </StackLayout>
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="GoToMyTeam" CommandParameter="." />
-                </StackLayout.GestureRecognizers>-->
+                
+                
             </StackLayout>
 
         </StackLayout>

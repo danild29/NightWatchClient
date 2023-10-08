@@ -26,7 +26,6 @@ public partial class ManageEventViewModel : ObservableObject
         try
         {
             var question = await _eventData.AddQuestionToEvent(EventModel._id, NewQuestion);
-            EventModel.questions.Add(question);
 
             NewQuestion = new TaskModel();
 
@@ -36,5 +35,17 @@ public partial class ManageEventViewModel : ObservableObject
 
             ErrorMessage = ex.Message;
         }
+    }
+
+
+    [RelayCommand]
+    private async Task GoToTeamsInEvent()
+    {
+        if (EventModel == null) throw new Exception("EventModel can't be null here (GoToTeamsInEvent)");
+
+        await Shell.Current.GoToAsync(nameof(TeamsInEventPage), true, new Dictionary<string, object>
+        {
+            {nameof(EventModel), EventModel }
+        });
     }
 }

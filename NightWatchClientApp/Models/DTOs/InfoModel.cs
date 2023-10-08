@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NightWatchClientApp.Models.DTOs;
 
-public class ErrorModel
+public class InfoModel
 {
     public string message { get; set; } = null;
 
@@ -14,11 +14,11 @@ public class ErrorModel
     {
         return message == null;
     }
-    public ErrorModel()
+    public InfoModel()
     {
             
     }
-    public ErrorModel(string m)
+    public InfoModel(string m)
     {
         message = m;
     }

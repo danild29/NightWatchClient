@@ -8,10 +8,12 @@
              Shell.NavBarIsVisible="false">
 
 
-
+ 
     <StackLayout>
         <Label TextColor="White" Text="{Binding ErrorMessage}" HorizontalOptions="FillAndExpand"/>
 
+
+        <Button Text="посмотреть команды" Command="{Binding GoToTeamsInEventCommand}"/>
         <StackLayout VerticalOptions="Center" >
 
 
@@ -25,7 +27,7 @@
         <Label Margin="30" Text="вопросы: " FontSize="24" FontFamily="RobotoBold" />
 
 
-
+        
 
         <Grid RowDefinitions="*" ColumnDefinitions="*">
 

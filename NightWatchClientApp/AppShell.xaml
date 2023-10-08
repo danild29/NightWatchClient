@@ -13,6 +13,11 @@
         <ShellContent ContentTemplate="{DataTemplate v:LoginPage}"/>
     </ShellItem>
 
+
+    <ShellItem Route="PlayPage">
+        <ShellContent ContentTemplate="{DataTemplate v:PlayPage}"/>
+    </ShellItem>
+
     <TabBar Route="MainPage">
         
         <Tab Title="моя команда" NavigationPage.HasNavigationBar="false" IsVisible="{Binding IsVisibleEvents}" >

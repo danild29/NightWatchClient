@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NightWatchClientApp.Views.TeamsInEventPage"
+             xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
+             xmlns:m="clr-namespace:NightWatchClientApp.Models"
+             x:DataType="vm:TeamsInEventViewModel"
+             Shell.NavBarIsVisible="false">
+
+    <StackLayout>
+        <Grid RowDefinitions="*" ColumnDefinitions="*">
+
+            <CollectionView ItemsSource="{Binding EventModel.members}"  SelectionMode="None" HeightRequest="650" 
+                                        Grid.Row="0" Grid.Column="0">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Team">
+                        <Frame MinimumHeightRequest="315">
+
+                            <!--<Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>-->
+
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="{Binding teamName}" FontSize="24" FontFamily="RobotoBold" />
+                                    <Label Text="|||" FontSize="24" FontFamily="RobotoBold" />
+                                    <Label Text="{Binding _id}" FontSize="24" FontFamily="RobotoBold" />
+                                </StackLayout>
+                                <StackLayout>
+                                    <Button Text="выгнать" BackgroundColor="Black" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
+                                    CommandParameter="{Binding .}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        <Entry TextColor="White" Text="{Binding TeamId}" 
+                           Placeholder="id новой команды" HorizontalOptions="FillAndExpand"/>
+
+        <Button  Text="пригласить команду" Command="{Binding AddTeamCommand}"/>
+    </StackLayout>
+</ContentPage>

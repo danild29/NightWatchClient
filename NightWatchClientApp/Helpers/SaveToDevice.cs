@@ -21,4 +21,9 @@ internal class DataSaver
         return JsonSerializer.Deserialize<T>(data);
     }
 
+
+    public static void ClearAll()
+    {
+        Preferences.Default.Clear();
+    }
 }

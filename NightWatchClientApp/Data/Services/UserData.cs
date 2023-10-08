@@ -31,7 +31,7 @@ public class UserData : IUserData, IDisposable
     {
     }
 
-    public async Task<ErrorModel> Login(UserLoginDto user)
+    public async Task<InfoModel> Login(UserLoginDto user)
     {
         await Task.Delay(delay);
 
@@ -50,14 +50,14 @@ public class UserData : IUserData, IDisposable
             return null;
         }
 
-        var er = JsonSerializer.Deserialize<ErrorModel>(result, CaseInsensitive);
+        var er = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
         return er;
     }
 
 
 
 
-    public async Task<ErrorModel> Register(UserRegisterDto userDto)
+    public async Task<InfoModel> Register(UserRegisterDto userDto)
     {
 
         string json = JsonSerializer.Serialize(userDto);
@@ -78,15 +78,31 @@ public class UserData : IUserData, IDisposable
 
         try
         {
-            var er = JsonSerializer.Deserialize<ErrorModel>(result, CaseInsensitive);
+            var er = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
             return er;
         }
         catch (Exception)
         {
-            ErrorModel er = new ErrorModel();
+            InfoModel er = new InfoModel();
             er.message = result;
             return er;
         }
+    }
+
+    public async Task<Team> GetMyTeam()
+    {
+
+        HttpResponseMessage response = await _client.GetAsync($"get-team-by-id/{UserAppInfo.UserData._id}");
+        string result = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+            var u = JsonSerializer.Deserialize<Team>(result, CaseInsensitive);
+            UserAppInfo.TeamData = u;
+            return u;
+        }
+
+        return null;
     }
 
 

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace NightWatchClientApp.Data.Services;
 
@@ -27,48 +27,9 @@ public class TeamData : ITeamData, IDisposable
 
     }
 
-    public async Task<ErrorModel> JoinTeam(TeamCreateDto team)
+    public async Task<InfoModel> JoinTeam(TeamCreateDto team)
     {
-
-        string json = JsonSerializer.Serialize(team);
-
-        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserAppInfo.UserData.Token);
-
-
-        HttpResponseMessage response = await _client.PostAsync($"invite/{UserAppInfo.UserData.Id}", data);
-
-        string result = await response.Content.ReadAsStringAsync();
-
-
-        if (response.IsSuccessStatusCode)
-        {
-            var u = JsonSerializer.Deserialize<TeamTransfer>(result, CaseInsensitive);
-            UserAppInfo.TeamData = u.Team;
-            return null;
-        }
-
-        var er = JsonSerializer.Deserialize<ErrorModel>(result, CaseInsensitive);
-        return er;
-    }
-
-
-
-
-    public async Task<ErrorModel> CreateTeam(TeamCreateDto team)
-    {
-
-
-
-        string json = JsonSerializer.Serialize(team);
-
-        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserAppInfo.UserData.Token);
-
-
-        HttpResponseMessage response = await _client.PostAsync($"new/{UserAppInfo.UserData.Id}", data);
+        HttpResponseMessage response = await SendPostRequest($"invite/{UserAppInfo.UserData.Id}", team);
 
         string result = await response.Content.ReadAsStringAsync();
 
@@ -79,7 +40,7 @@ public class TeamData : ITeamData, IDisposable
             return null;
         }
 
-        var er = JsonSerializer.Deserialize<ErrorModel>(result, CaseInsensitive);
+        var er = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
         return er;
     }
 
@@ -88,36 +49,46 @@ public class TeamData : ITeamData, IDisposable
 
 
 
-    public void Dispose()
+
+    public async Task<InfoModel> CreateTeam(TeamCreateDto team)
     {
-        _client.Dispose();
+        HttpResponseMessage response = await SendPostRequest($"new/{UserAppInfo.UserData.Id}", team);
+
+        string result = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+            var u = JsonSerializer.Deserialize<TeamTransfer>(result, CaseInsensitive);
+            UserAppInfo.TeamData = u.Team;
+            return null;
+        }
+
+        var er = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
+        return er;
+
     }
 
-    public async Task LogOutTeam()
+    public async Task<InfoModel> LogOutTeam()
     {
-        string json = JsonSerializer.Serialize(new
+        var jsonObj = new
         {
             capId = UserAppInfo.TeamData.captain._id,
             teamId = UserAppInfo.TeamData._id
-        });
+        };
 
-
-        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserAppInfo.UserData.Token);
-
-
-        HttpResponseMessage response = await _client.PostAsync($"kick/{UserAppInfo.UserData.Id}", data);
+        HttpResponseMessage response = await SendPostRequest($"kick/{UserAppInfo.UserData.Id}", jsonObj);
 
         string result = await response.Content.ReadAsStringAsync();
+        var err = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
 
+        if (!response.IsSuccessStatusCode) throw new Exception(err.message);
+
+        return err;
     }
 
     public async Task<bool> UpdateTeam(CancellationToken ct)
     {
         if (UserAppInfo.TeamData == null || string.IsNullOrEmpty(UserAppInfo.TeamData._id)) return false;
-
-
 
         HttpResponseMessage response = await _client.GetAsync($"team/{UserAppInfo.TeamData._id}");
         string result = await response.Content.ReadAsStringAsync();
@@ -133,12 +104,54 @@ public class TeamData : ITeamData, IDisposable
         return false;
     }
 
+
+    public async Task<InfoModel> AnswerQuestion(string answer, string taskId, string EventId)
+    {
+        var jsonObj = new {
+            answer,
+            taskId,
+            teamId = UserAppInfo.TeamData._id
+        };
+
+
+        HttpResponseMessage response = await SendPostRequest($"sendanswer/{EventId}", jsonObj);
+
+        string result = await response.Content.ReadAsStringAsync();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new InvalidDataException(result);
+        }
+        var er = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
+        return er;
+    }
+
+    private async Task<HttpResponseMessage> SendPostRequest(string url, object jsonObj)
+    {
+        string json = JsonSerializer.Serialize(jsonObj);
+        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserAppInfo.UserData.Token);
+
+        return await _client.PostAsync(url, data);
+    }
+
+
+
+    public void Dispose()
+    {
+        _client.Dispose();
+    }
+
 }
 
 public interface ITeamData
 {
-    Task<ErrorModel> CreateTeam(TeamCreateDto data);
+    Task<InfoModel> CreateTeam(TeamCreateDto data);
     Task<bool> UpdateTeam(CancellationToken ct);
-    Task<ErrorModel> JoinTeam(TeamCreateDto team);
-    Task LogOutTeam();
+    Task<InfoModel> JoinTeam(TeamCreateDto team);
+    Task<InfoModel> LogOutTeam();
+    Task<InfoModel> AnswerQuestion(string answer, string taskId, string EventId);
+
+
 }

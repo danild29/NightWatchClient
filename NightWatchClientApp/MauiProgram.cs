@@ -42,14 +42,21 @@ public static class MauiProgram
 	}
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddSingleton<LoginViewModel>();
-        mauiAppBuilder.Services.AddSingleton<CreateAccountViewModel>();
-        mauiAppBuilder.Services.AddSingleton<ProfileViewModel>();
-        mauiAppBuilder.Services.AddSingleton<MyTeamViewModel>();
-        mauiAppBuilder.Services.AddSingleton<AllEventsViewModel>();
-        mauiAppBuilder.Services.AddSingleton<EventDetailsViewModel>();
-        mauiAppBuilder.Services.AddSingleton<CreateEventViewModel>();
-        mauiAppBuilder.Services.AddSingleton<ManageEventViewModel>();
+		
+		IEnumerable<Type> types = typeof(LoginViewModel).Assembly.ExportedTypes;
+		var viewModels = types.Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("ViewModel"));
+		viewModels.ToList().ForEach(m => mauiAppBuilder.Services.AddSingleton(m));
+
+
+        //mauiAppBuilder.Services.AddSingleton<LoginViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<CreateAccountViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<ProfileViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<MyTeamViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<AllEventsViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<EventDetailsViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<CreateEventViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<ManageEventViewModel>();
+        //mauiAppBuilder.Services.AddSingleton<TeamsInEventViewModel>();
 
         return mauiAppBuilder;
     }

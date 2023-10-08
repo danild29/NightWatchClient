@@ -35,6 +35,7 @@ public partial class LoginViewModel : ObservableObject
 
     public async Task GetDataFromPrefernces()
     {
+        //DataSaver.ClearAll();
         IsBusy = true;
         try
         {
@@ -43,7 +44,7 @@ public partial class LoginViewModel : ObservableObject
 
             var user = JsonSerializer.Deserialize<UserLoginDto>(data);
 
-            ErrorModel er = await _userData.Login(user);
+            InfoModel er = await _userData.Login(user);
             if (er == null)
             {
                 await Shell.Current.GoToAsync("//MainPage");
@@ -56,6 +57,7 @@ public partial class LoginViewModel : ObservableObject
         }
         catch (Exception ex)
         {
+            throw;
             await Shell.Current.DisplayAlert("LoginViewModel", ex.Message, "ok");
         }
         finally 
@@ -76,7 +78,7 @@ public partial class LoginViewModel : ObservableObject
         UserLoginDto user = new(UserLoginName, UserPassword);
         try
         {
-            ErrorModel er = await _userData.Login(user);
+            InfoModel er = await _userData.Login(user);
             if (er == null)
             {
                 Preferences.Default.Set(nameof(UserLoginDto), JsonSerializer.Serialize(user));

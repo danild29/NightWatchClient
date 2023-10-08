@@ -10,7 +10,7 @@ public partial class CreateEventViewModel: ObservableObject
 {
     [ObservableProperty] private string error = string.Empty;
 
-    [ObservableProperty] private ObservableCollection<EventModel> managedEvents;
+    [ObservableProperty] private ObservableCollection<EventModel> managedEvents = new();
 
     [ObservableProperty] private string eventName;
     [ObservableProperty] private string eventDescription;
@@ -31,6 +31,7 @@ public partial class CreateEventViewModel: ObservableObject
     public CreateEventViewModel(IEventData eventData)
     {
         _eventData = eventData;
+        managedEvents = new ObservableCollection<EventModel>(_eventData.EventManager.Events);
     }
 
 

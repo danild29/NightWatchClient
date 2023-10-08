@@ -4,6 +4,7 @@ namespace NightWatchClientApp.Data.Services;
 
 public interface IUserData
 {
-    Task<ErrorModel> Login(UserLoginDto user);
-    Task<ErrorModel> Register(UserRegisterDto user);
+    Task<InfoModel> Login(UserLoginDto user);
+    Task<InfoModel> Register(UserRegisterDto user);
+    Task<Team> GetMyTeam();
 }

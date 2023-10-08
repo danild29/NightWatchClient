@@ -15,6 +15,7 @@ public partial class EventDetailsViewModel: ObservableObject
 
     public EventDetailsViewModel()
     {
+        var a = EventModel;
     }
 
     [RelayCommand]

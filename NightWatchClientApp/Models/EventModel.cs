@@ -17,7 +17,7 @@ public class EventModel
     public string Status { get; set; }
     public string Image { get; set; }
 
-    public List<Team> members { get; set; }
+    public ObservableCollection<Team> members { get; set; }
     public ObservableCollection<TaskModel> questions { get; set; }
     public User host { get; set; }
 

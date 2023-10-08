@@ -35,7 +35,7 @@ public partial class CreateAccountViewModel : ObservableObject
         IsBusy = true;
         UserRegisterDto user = new UserRegisterDto(UserLoginName, UserPassword, UserNickName);
 
-        ErrorModel er = await _userData.Register(user);
+        InfoModel er = await _userData.Register(user);
         if (er == null)
         {
             UserLoginDto u = new UserLoginDto(UserNickName, UserPassword);
