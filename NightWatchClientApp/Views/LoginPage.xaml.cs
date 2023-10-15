@@ -11,7 +11,10 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 
-		if(DevMain.IsFastLogin)
+		MainBackground.Source = ImageSource.FromResource("NightWatchClientApp.Resources.Background.background.jpg");
+		MainBackground.Aspect = Aspect.Fill;
+
+		if (DevMain.IsFastLogin)
 		{
 			ServiceHelper.GetService<LoginViewModel>().GetDataFromPrefernces().Await();
 		}
@@ -19,6 +22,6 @@ public partial class LoginPage : ContentPage
 		BindingContext = ServiceHelper.GetService<LoginViewModel>();
 
 
-    }
+	}
 
 }

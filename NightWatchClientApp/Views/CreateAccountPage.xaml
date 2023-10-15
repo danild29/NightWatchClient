@@ -6,56 +6,106 @@
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
              Shell.NavBarIsVisible="false">
 
-
     <ContentPage.Content>
-        <StackLayout>
-        <ActivityIndicator IsRunning="{Binding IsBusy}" />
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+        <Grid VerticalOptions="FillAndExpand" IsVisible="{Binding IsVisible}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <StackLayout>
+                <Frame BackgroundColor="White" CornerRadius="25" Margin="15,15,15,26" Padding="0,0,0,27">
+                    <StackLayout>
+                        <Image Source="nw_logo.svg" HorizontalOptions="Center" VerticalOptions="Center" Margin="118,10,119,14"/>
 
+                        <Line>
+                            <Line.Background>
+                                <LinearGradientBrush StartPoint="0,-1" EndPoint="0,1">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.65"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Line.Background>
+                        </Line>
 
-            <Frame CornerRadius="30"  Padding="0" Margin="0,10,0,0">
-                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
-                    <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
+                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="19,12,19,12">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Дозор " TextColor="{StaticResource NightWatchBlue}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="-2" LineHeight="0.85"/>
+                                    <Span Text="- это Российская игра флеш-моб в формате ночных поисковых игр, 
+                           появившаяся в 2005 году и включающая в себя соревнования по городскому 
+                           ориентированию, актёрские и ролевые 
+                           уровни, экстремальные и логические 
+                           задания" FontSize="14" TextColor="{StaticResource NightWatchBlue}" FontFamily="RobotoMono" FontAttributes="None" CharacterSpacing="-2" LineHeight="0.85"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
 
-                        <Entry TextColor="White" Text="{Binding UserNickName}" Placeholder="имя пользователя" 
-                             HorizontalOptions="FillAndExpand"/>
+                        <Line>
+                            <Line.Background >
+                                <LinearGradientBrush StartPoint="0,-1" EndPoint="0,1">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.65"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Line.Background>
+                        </Line>
+                    </StackLayout>
+                </Frame>
 
-                </StackLayout>
-            </Frame>
+                <Frame BackgroundColor="White" CornerRadius="25" Margin="39,0, 39, 72" Padding="0">
+                    <StackLayout>
+                        <Label Text="Регистрация" FontSize="20" TextColor="{StaticResource NightWatchBlue}"
+                               FontFamily="RobotoMono" FontAttributes="Bold" HorizontalTextAlignment="Center" CharacterSpacing="0" LineHeight="1" Margin="76,25,76,0"/>
+                        <Grid>
+                            <!--Здесь нужно добавить ввод для почты-->
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="mailico.svg" Margin="20,32,6,0"/>
+                                <Entry Placeholder="Почта" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserLoginName}" Margin="0,24,43,0"/>
+                            </StackLayout>
+                        </Grid>
 
-            <Frame CornerRadius="30"  Padding="0" Margin="0,10,0,0">
-                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
-                    <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
+                        <!--Это основной ник-нейм по которому будет выполняться вход-->
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="userico.svg" Margin="20,22,6,0"/>
+                            <Entry Placeholder="Ник-нейм" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserNickName}" Margin="0,12,43,0"/>
+                        </StackLayout>
 
-                        <Entry TextColor="White" Text="{Binding UserLoginName}" Placeholder="Логин(по желанию)" HorizontalOptions="FillAndExpand"/>
+                        <!--Здесь нужно сравнивать два введенных пароля-->
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="lockico.svg" Margin="20,22,6,0"/>
+                            <Entry Placeholder="Пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
+                        </StackLayout>
 
-                </StackLayout>
-            </Frame>
+                        <!--Здесь нужно сравнивать два введенных пароля-->
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="repeatico.svg" Margin="20,22,6,0"/>
+                            <Entry Placeholder="Повторите пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
+                        </StackLayout>
 
+                        <Label Text="{Binding LoginMessage, Mode=OneWay}" IsVisible="{Binding TurnLoginMessage, Mode=OneWay}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
+                               HorizontalTextAlignment="Center" CharacterSpacing="-1.25" LineHeight="1"  Margin="44,0,43,0"/>
+                        <Button Text="Зарегистрироваться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="43,12,43,0"
+                                CornerRadius="20" Command="{Binding RegisterNewUserCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                            <Button.Effects>
 
-            <Frame CornerRadius="30"  Padding="0" Margin="0,10,0,0">
-                <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F" >
-                    <Image VerticalOptions="Center" Source="eye" HeightRequest="20" Margin="0,0,10,0"/>
-
-                        <Entry TextColor="White" IsPassword="True" Text="{Binding UserPassword}" Placeholder="Пароль"  HorizontalOptions="FillAndExpand"/>
-
-                </StackLayout>
-            </Frame>
-
-            <Label Text="{Binding LoginMessage}" 
-                   IsVisible="{Binding TurnLoginMessage}" Margin="0,10,0,0">
-            </Label>
-
-
-            <Button Text="Зарегистрироваться" WidthRequest="400"
-                    Command="{Binding RegisterNewUserCommand}"/>
-
-
-            <Button Text="Назад" Command="{Binding GoBackCommand}" />
-
-
-        </StackLayout>
-        </StackLayout>
-
+                            </Button.Effects>
+                        </Button>
+                        <Label Text="Уже есть аккаунт" TextColor="{StaticResource NightWatchBlue}" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
+                               HorizontalTextAlignment="Center" CharacterSpacing="0" LineHeight="1" Margin="57,10,50,0"/>
+                        <Button Text="Назад" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="44,10,43,35"
+                                CornerRadius="20" Command="{Binding GoBackCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

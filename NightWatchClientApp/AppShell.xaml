@@ -7,8 +7,6 @@
     xmlns:v="clr-namespace:NightWatchClientApp.Views"
     Shell.FlyoutBehavior="Disabled">
 
-
-
     <ShellItem Route="LoginPage">
         <ShellContent ContentTemplate="{DataTemplate v:LoginPage}"/>
     </ShellItem>
@@ -20,19 +18,19 @@
 
     <TabBar Route="MainPage">
         
-        <Tab Title="моя команда" NavigationPage.HasNavigationBar="false" IsVisible="{Binding IsVisibleEvents}" >
+        <Tab Icon="homeico.svg" Title="Главная" NavigationPage.HasNavigationBar="false" IsVisible="{Binding IsVisibleEvents}" >
+            <ShellContent ContentTemplate="{DataTemplate v:CreateEventPage}" />
+        </Tab>
+
+        <Tab Icon="teamico.svg" Title="Команды" >
             <ShellContent ContentTemplate="{DataTemplate v:MyTeamPage}" />
         </Tab>
-        
-        <Tab Title="все мероприятия" >
+      
+        <Tab Icon="listico.svg" Title="Мероприятия">
             <ShellContent ContentTemplate="{DataTemplate v:AllEventsPage}" />
         </Tab>
-      
-        <Tab Title="профиль" >
+        <Tab Icon="userico.svg" Title="Профиль" > 
             <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" />
-        </Tab>
-        <Tab Title="создать ивент" > 
-            <ShellContent ContentTemplate="{DataTemplate v:CreateEventPage}" />
         </Tab>
     </TabBar>
 </Shell>

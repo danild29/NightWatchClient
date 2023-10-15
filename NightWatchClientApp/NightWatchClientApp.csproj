@@ -49,6 +49,32 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\lockico.png" />
+	  <MauiImage Remove="Resources\Images\nw_logo.png" />
+	  <MauiImage Remove="Resources\Images\profileicon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Background\background.jpg" />
+	  <None Remove="Resources\Fonts\RobotoMono.ttf" />
+	  <None Remove="Resources\Images\homeico.svg" />
+	  <None Remove="Resources\Images\listico.svg" />
+	  <None Remove="Resources\Images\lockico.png" />
+	  <None Remove="Resources\Images\lockico.svg" />
+	  <None Remove="Resources\Images\mailico.svg" />
+	  <None Remove="Resources\Images\nw_logo.png" />
+	  <None Remove="Resources\Images\nw_logo.svg" />
+	  <None Remove="Resources\Images\profileicon.png" />
+	  <None Remove="Resources\Images\repeatico.svg" />
+	  <None Remove="Resources\Images\teamico.svg" />
+	  <None Remove="Resources\Images\userico.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Background\background.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="FluentValidation" Version="11.6.0" />
@@ -97,6 +123,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TeamsInEventPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TopPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
