@@ -74,9 +74,6 @@
                                     <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Button.Background>
-                            <Button.Effects>
-                                
-                            </Button.Effects>
                         </Button>
                         <Label Text="Забыли пароль?" TextColor="{StaticResource NightWatchBlue}" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
                                        HorizontalTextAlignment="Center" CharacterSpacing="0" LineHeight="1" Margin="92,6,92,0" >

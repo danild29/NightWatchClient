@@ -10,111 +10,118 @@
     
     <ContentPage.Content>
 
-        <StackLayout>
-            <Label Text="{Binding ErrorMessage}" />
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout>
+                <Label Text="{Binding ErrorMessage}" />
 
-            <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">
-                <CollectionView ItemsSource="{Binding EventList}" SelectionMode="None" >
+                <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">
+                    <CollectionView ItemsSource="{Binding EventList}" SelectionMode="None" >
 
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
-                    </CollectionView.ItemsLayout>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="m:EventModel">
-                            <Frame MinimumHeightRequest="315">
-                                
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
-                                        CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                
-                                    <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:EventModel">
+                                <Frame MinimumHeightRequest="315">
 
-                                    <Grid Grid.Column="1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="AUTO" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
 
-                                        <Label Grid.Row="0" Text="{Binding name}" FontSize="24" FontFamily="RobotoBold" />
-                                        <Label Grid.Row="1" Text="{Binding description}" FontSize="24" FontFamily="RobotoBold" />
-                                    
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{Binding Image}" Aspect="AspectFill"/>
+
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="AUTO" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Label Grid.Row="0" Text="{Binding name}" FontSize="24" FontFamily="RobotoBold" />
+                                            <Label Grid.Row="1" Text="{Binding description}" FontSize="24" FontFamily="RobotoBold" />
+
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
 
 
 
-            <!--<StackLayout>
-                <Label Text="тут все мерпориятия которые врообще есть" Padding="30"/>
-                <Button Clicked="Button_Clicked" Text="add but"/>
-                <Button Clicked="Button_Clicked_1" Text="rem but"/>
-            </StackLayout>-->
+                <!--<StackLayout>
+                    <Label Text="тут все мерпориятия которые врообще есть" Padding="30"/>
+                    <Button Clicked="Button_Clicked" Text="add but"/>
+                    <Button Clicked="Button_Clicked_1" Text="rem but"/>
+                </StackLayout>-->
 
-            <!--<SearchBar Placeholder="имя события" TextChanged="TextChangedOnSearchBar" TextColor="Wheat" BackgroundColor="Green"/>
+                <!--<SearchBar Placeholder="имя события" TextChanged="TextChangedOnSearchBar" TextColor="Wheat" BackgroundColor="Green"/>
 
             
             
             
-            <ListView SeparatorColor="Red"  x:FieldModifier="public"  RowHeight="150">  ItemTapped="OnEventTapped"
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell >
+                <ListView SeparatorColor="Red"  x:FieldModifier="public"  RowHeight="150">  ItemTapped="OnEventTapped"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
 
 
-                            --><!-- полный пиздец  
-                                тут описаны как расположены мероприятия
+                                -->
+                <!-- полный пиздец  
+                                    тут описаны как расположены мероприятия
                         
-                            --><!--
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                -->
+                <!--
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
 
 
-                                <Image Grid.RowSpan="2"  Source="{Binding ImageUrl}"/>
-                                <Label Text="{Binding NameEvent}"
-                                        Grid.Column="1"
-                                        FontSize="Large"
-                                        TextColor="Beige"
-                                        FontAttributes="Bold"/>
+                                    <Image Grid.RowSpan="2"  Source="{Binding ImageUrl}"/>
+                                    <Label Text="{Binding NameEvent}"
+                                            Grid.Column="1"
+                                            FontSize="Large"
+                                            TextColor="Beige"
+                                            FontAttributes="Bold"/>
 
-                                <Label Text="{Binding DescriptionEvent}"
-                                        Grid.Column="1"
-                                        Grid.Row="1"
-                                        FontSize="Medium"
-                                        TextColor="Beige"
-                                        FontAttributes="Bold"/>
+                                    <Label Text="{Binding DescriptionEvent}"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            FontSize="Medium"
+                                            TextColor="Beige"
+                                            FontAttributes="Bold"/>
 
-                            </Grid>
+                                </Grid>
 
 
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
-            
-            
-            
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
 
-        </StackLayout>
+
+
+
+            </StackLayout>
+        </Grid>
+
+        
     </ContentPage.Content>
 </ContentPage>

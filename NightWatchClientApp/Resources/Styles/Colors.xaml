@@ -43,6 +43,7 @@
 
     <Color x:Key="NightWatchBlue">#2A209E</Color>
     <Color x:Key="NightWatchPurple">#470060</Color>
+    <Color x:Key="NightWatchRegular">#5e2d82</Color>
 
     <LinearGradientBrush x:Key="NightWatchGradientUD" StartPoint="0,-1" EndPoint="0,1">
         <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.65"/>

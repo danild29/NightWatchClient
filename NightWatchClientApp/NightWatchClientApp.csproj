@@ -56,22 +56,35 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Background\background.jpg" />
+	  <None Remove="Resources\Background\bigbackground.jpg" />
 	  <None Remove="Resources\Fonts\RobotoMono.ttf" />
+	  <None Remove="Resources\Images\clothesico.svg" />
+	  <None Remove="Resources\Images\dayico.svg" />
+	  <None Remove="Resources\Images\dot.svg" />
 	  <None Remove="Resources\Images\homeico.svg" />
 	  <None Remove="Resources\Images\listico.svg" />
 	  <None Remove="Resources\Images\lockico.png" />
 	  <None Remove="Resources\Images\lockico.svg" />
 	  <None Remove="Resources\Images\mailico.svg" />
+	  <None Remove="Resources\Images\missphoto.svg" />
+	  <None Remove="Resources\Images\nightico.svg" />
 	  <None Remove="Resources\Images\nw_logo.png" />
 	  <None Remove="Resources\Images\nw_logo.svg" />
+	  <None Remove="Resources\Images\passwordico.svg" />
+	  <None Remove="Resources\Images\phoneico.svg" />
 	  <None Remove="Resources\Images\profileicon.png" />
 	  <None Remove="Resources\Images\repeatico.svg" />
+	  <None Remove="Resources\Images\searchico.svg" />
 	  <None Remove="Resources\Images\teamico.svg" />
+	  <None Remove="Resources\Images\teamidico.svg" />
+	  <None Remove="Resources\Images\teamnameico.svg" />
 	  <None Remove="Resources\Images\userico.svg" />
+	  <None Remove="Resources\Images\vehicleico.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Background\background.jpg" />
+	  <EmbeddedResource Include="Resources\Background\bigbackground.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>

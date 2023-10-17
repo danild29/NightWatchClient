@@ -6,30 +6,263 @@
              xmlns:m="clr-namespace:NightWatchClientApp.Models"
              x:DataType="vm:MyTeamViewModel"
              NavigationPage.HasNavigationBar="false">
-    
+
     <ContentPage.Content>
-        <StackLayout>
-
+        <Grid>
             <Label Text="{Binding ErrorMessage}" FontSize="30"/>
-            <StackLayout IsVisible="{Binding HasNoTeam}" Margin="10,20,10,10">
-                <StackLayout Margin="10, 20,10,10">
-                    <Entry Placeholder="id команды" Text="{Binding LogTeamName} "/>
-                    <Entry Placeholder="пароль команды" Text="{Binding LogTeamPassword}"/>
-                    <Button Text="войти" Command="{Binding LogInTeamCommand}"/>
-                </StackLayout>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <StackLayout IsVisible="{Binding HasNoTeam}">
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="teamico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Команды" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                               Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Entry Placeholder="Поиск команды" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                               Margin="24,0,0,0" WidthRequest="282"/>
+                        <Image Source="searchico.svg" Margin="21,7,7,7"/>
+                    </StackLayout>
+                </Frame>
 
-                <StackLayout Margin="10, 220,10,10">
-                    <Label Text="создать команду" FontSize="20"/>
-                    <Entry Placeholder="название команды" Text="{Binding CreateTeamName} "/>
-                    <Entry Placeholder="пароль команды" Text="{Binding CreateTeamPassword}"/>
-                    <Button Text="создать" Command="{Binding CreateTeamCommand}"/>
-                </StackLayout>
+
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0" HeightRequest="222">
+                    <StackLayout>
+                        <Label Text="Присоединиться к существующей команде" TextColor="{StaticResource NightWatchBlue}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                           Margin="53,15,54,0"/>
+                        <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
+                            <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry Placeholder="Идентификатор команды" Text="{Binding LogTeamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                   WidthRequest="282" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
+                            <Image Source="passwordico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry Placeholder="Пароль" Text="{Binding LogTeamPassword}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                  WidthRequest="282" />
+                        </StackLayout>
+                        <Button Text="Присоединиться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,87,15"
+            CornerRadius="20" Command="{Binding LogInTeamCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,60,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout>
+                        <Label Text="Создать команду" TextColor="{StaticResource NightWatchBlue}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+               Margin="53,28,54,0"/>
+                        <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
+                            <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry Placeholder="Название команды" Text="{Binding CreateTeamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                       WidthRequest="282" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
+                            <Image Source="passwordico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry Placeholder="Пароль" Text="{Binding CreateTeamPassword}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                      WidthRequest="282" />
+                        </StackLayout>
+                        <Button Text="Создать" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,87,15"
+                                    CornerRadius="20" Command="{Binding CreateTeamCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackLayout>
+
+                </Frame>
+                
                 <Label Text="{Binding ErrorMessage}"/>
+                
             </StackLayout>
 
+            <StackLayout IsVisible="{Binding HasTeam}">
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="teamico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Команды" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+               Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+                
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Вы записаны на игру" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 10, 58, 0"/>
+                        <Label Text="Игра уже началась" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 0, 58, 0"/>
+                        <Button Text="Играть" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="67,11,67,0"
+                                CornerRadius="20" Command="{Binding GoPlayCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <!--Пофиксить отображение названия команды-->
+                        <Label Text="{Binding TeamModel.eventName}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" Margin="52, 11, 52, 0"/>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="95,12,95,0">
+                            <Image Source="nightico.svg" Margin="0,0,15,0"/>
+                            <Image Source="dayico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                            <Image Source="vehicleico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                            <Image Source="phoneico.svg" Margin="0,0,15,0"/>
+                            <Image Source="clothesico.svg" Margin="0,0,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="0,0,0,0">
+                            <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Margin="0,5,0,0">
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                    <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Авторы" CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                    <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Код мероприятия"  CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                    <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Город" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                         VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                    <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Километраж" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                          VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                    <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Стоимость" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                         VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <Image Source="missphoto.svg" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" Margin="0,10,24,0"/>
+                        </StackLayout>
+
+                        <!--Здесь нужно добавить кнопку чтобы отписаться от мероприятия-->
+                        <StackLayout Orientation="Horizontal" Margin="0,11,0,15">
+                            <Button Text="Отписаться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="24,0,68,0"
+                                        CornerRadius="20" WidthRequest="131">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                        <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                        <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            
+                            <!--Подробнее о мероприятии-->
+                            <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0"
+                                        CornerRadius="20" HorizontalOptions="EndAndExpand" WidthRequest="131">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                        <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                        <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackLayout>
+                        
+                        
+                    </StackLayout>
+                    
+                    <!--Окно "Ваша команда"-->
+                    
+                </Frame>
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,25,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Ваша команда" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                 HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 10, 58, 0"/>
+
+                        <!--Имя команды-->
+                        <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Source="userico.svg" Margin="24,0,3,0" VerticalOptions="CenterAndExpand"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding TeamModel.teamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
+                                <Label Text="{Binding TeamModel.members.Count}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
+                                <Label Text="/8" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <Line Margin="44,0,44,0">
+                                <Line.Background>
+                                    <LinearGradientBrush StartPoint="0,-1" EndPoint="0,1">
+                                        <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.65"/>
+                                        <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Line.Background>
+                            </Line>
+                        </StackLayout>
+
+                        <!--Пароль команды-->
+                        <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Source="lockico.svg" Margin="24,0,3,0" VerticalOptions="CenterAndExpand"/>
+                            <StackLayout Margin="0,0,0,0">
+                                <Label Text="{Binding TeamModel.password}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <Line Margin="44,0,44,0">
+                                <Line.Background>
+                                    <LinearGradientBrush StartPoint="0,-1" EndPoint="0,1">
+                                        <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.65"/>
+                                        <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Line.Background>
+                            </Line>
+                        </StackLayout>
+                        
+                        
+                        <!--Здесь нужно добавить кнопку подробнее о своей команде-->
+                        <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,27,88,0"
+                                     CornerRadius="20">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Text="Выйти из команды" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="44,12,44,15"
+                                    CornerRadius="20" Command="{Binding LogOutTeamCommand}" >
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
 
 
-            <!--   моя команда -->
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+    
+            <!--   моя команда --><!--
             <StackLayout Orientation="Vertical" Margin="10,20, 0,0" IsVisible="{Binding HasTeam}">
 
                 <StackLayout>
@@ -40,7 +273,7 @@
                 <Button Text="play" Command="{Binding GoPlayCommand}"/>
                 <Button Text="log out" Command="{Binding LogOutTeamCommand}"/>
                 <StackLayout Orientation="Vertical">
-                    <!--<Button Text="Выйти" Clicked="LeaveTeam"/>-->
+                    --><!--<Button Text="Выйти" Clicked="LeaveTeam"/>--><!--
                     <Label Text="Ваша команда :"/>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="имя-"/>
@@ -60,7 +293,7 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <!--<Image Source="{Binding Name}" Aspect="AspectFill"/>-->
+                    --><!--<Image Source="{Binding Name}" Aspect="AspectFill"/>--><!--
 
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -74,7 +307,7 @@
                     </Grid>
                 </Grid>
                 <RefreshView>
-                    <!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">-->
+                    --><!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">--><!--
                 <CollectionView ItemsSource="{Binding TeamModel.members}" SelectionMode="None" >
 
                     <CollectionView.ItemsLayout>
@@ -86,11 +319,11 @@
                         <DataTemplate x:DataType="m:User">
                             <Frame MinimumHeightRequest="315">
                                 
-                                <!--<Frame.GestureRecognizers>
+                                --><!--<Frame.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
                                         CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>-->
+                                </Frame.GestureRecognizers>--><!--
                                 
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -98,7 +331,7 @@
                                         <ColumnDefinition Width="2*" />
                                     </Grid.ColumnDefinitions>
                                 
-                                    <!--<Image Source="{Binding Name}" Aspect="AspectFill"/>-->
+                                    --><!--<Image Source="{Binding Name}" Aspect="AspectFill"/>--><!--
 
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
@@ -121,5 +354,5 @@
             </StackLayout>
 
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
 </ContentPage>
