@@ -68,15 +68,15 @@ public class TeamData : ITeamData, IDisposable
 
     }
 
-    public async Task<InfoModel> LogOutTeam()
+
+    public async Task<InfoModel> LeaveTeam()
     {
         var jsonObj = new
         {
-            capId = UserAppInfo.TeamData.captain._id,
-            teamId = UserAppInfo.TeamData._id
+            UserAppInfo.TeamData.teamName,
         };
 
-        HttpResponseMessage response = await SendPostRequest($"kick/{UserAppInfo.UserData.Id}", jsonObj);
+        HttpResponseMessage response = await SendPostRequest($"leave/{UserAppInfo.UserData.Id}", jsonObj);
 
         string result = await response.Content.ReadAsStringAsync();
         var err = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
@@ -85,6 +85,24 @@ public class TeamData : ITeamData, IDisposable
 
         return err;
     }
+
+    //public async Task<InfoModel> LogOutTeam()
+    //{
+    //    var jsonObj = new
+    //    {
+    //        capId = UserAppInfo.TeamData.captain?._id,
+    //        teamId = UserAppInfo.TeamData._id
+    //    };
+
+    //    HttpResponseMessage response = await SendPostRequest($"kick/{UserAppInfo.UserData.Id}", jsonObj);
+
+    //    string result = await response.Content.ReadAsStringAsync();
+    //    var err = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
+
+    //    if (!response.IsSuccessStatusCode) throw new Exception(err.message);
+
+    //    return err;
+    //}
 
     public async Task<bool> UpdateTeam(CancellationToken ct)
     {
@@ -103,6 +121,9 @@ public class TeamData : ITeamData, IDisposable
 
         return false;
     }
+
+
+
 
 
     public async Task<InfoModel> AnswerQuestion(string answer, string taskId, string EventId)
@@ -150,8 +171,9 @@ public interface ITeamData
     Task<InfoModel> CreateTeam(TeamCreateDto data);
     Task<bool> UpdateTeam(CancellationToken ct);
     Task<InfoModel> JoinTeam(TeamCreateDto team);
-    Task<InfoModel> LogOutTeam();
+    //Task<InfoModel> LogOutTeam();
     Task<InfoModel> AnswerQuestion(string answer, string taskId, string EventId);
+    Task<InfoModel> LeaveTeam();
 
 
 }

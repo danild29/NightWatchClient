@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NightWatchClientApp.Views.TeamDetailsPage"
+             xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
+             xmlns:m="clr-namespace:NightWatchClientApp.Models"
+             x:DataType="vm:TeamDetailsViewModel"
+             NavigationPage.HasNavigationBar="false">
+       <!--моя команда-->
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Margin="10,20, 0,0" >
+
+                <StackLayout>
+                    <Label Text="вы записаны на мероприятие : "/>
+                    <Label Text="{Binding TeamModel.eventName}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical">
+
+    
+                    <Label Text="Ваша команда :"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="имя-"/>
+                        <Label Text="{Binding TeamModel.teamName}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="пароль-"/>
+                        <Label Text="{Binding TeamModel.password}"/>
+                    </StackLayout>
+
+                    <Label Text="количество игроков в команде"/>
+                    <Label Text="{Binding TeamModel.members.Count}"/>
+                </StackLayout>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+
+    
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="AUTO" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Text="{Binding TeamModel.captain.Name}" FontSize="24" FontFamily="RobotoBold" />
+                        <Label Grid.Row="1" Text="{Binding TeamModel.captain.EMail}" FontSize="24" FontFamily="RobotoBold" />
+
+                    </Grid>
+                </Grid>
+                <RefreshView>
+                    
+    <!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">-->
+    
+                <CollectionView ItemsSource="{Binding TeamModel.members}" SelectionMode="None" >
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:User">
+                            <Frame MinimumHeightRequest="315">
+                                
+                                
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+    
+                                
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                
+                                    
+                                    <Image Source="{Binding Name}" Aspect="AspectFill"/>
+    
+
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="AUTO" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Grid.Row="1" Text="{Binding EMail}" FontSize="24" FontFamily="RobotoBold" />
+                                    
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+                
+                
+       </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -55,13 +55,13 @@
                         <Grid>
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="userico.svg" Margin="20,32,6,0"/>
-                                <Entry Placeholder="Ник-нейм" HorizontalOptions="FillAndExpand" Text="{Binding UserLoginName}" Margin="0,24,43,0"/>
+                                <Entry TextColor="Black" Placeholder="Ник-нейм" HorizontalOptions="FillAndExpand" Text="{Binding UserLoginName}" Margin="0,24,43,0"/>
                             </StackLayout>
                         </Grid>
 
                         <StackLayout Orientation="Horizontal">
                             <Image Source="lockico.svg" Margin="20,22,6,0"/>
-                            <Entry Placeholder="Пароль" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
+                            <Entry TextColor="Black" Placeholder="Пароль" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
                         </StackLayout>
                         
                         <Label Text="{Binding LoginMessage, Mode=OneWay}" IsVisible="{Binding TurnLoginMessage, Mode=OneWay}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"

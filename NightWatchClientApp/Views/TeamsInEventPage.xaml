@@ -8,6 +8,8 @@
              Shell.NavBarIsVisible="false">
 
     <StackLayout>
+
+        <Label Text="{Binding Message}" FontSize="Body" />
         <Grid RowDefinitions="*" ColumnDefinitions="*">
 
             <CollectionView ItemsSource="{Binding EventModel.members}"  SelectionMode="None" HeightRequest="650" 

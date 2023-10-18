@@ -16,6 +16,10 @@ public class EventModel
     public DateTime DateEvent { get; set; }
     public string Status { get; set; }
     public string Image { get; set; }
+    public string Start { get; set; }
+    public string End { get; set; }
+
+    public ObservableCollection<string> photos { get; set; }
 
     public ObservableCollection<Team> members { get; set; }
     public ObservableCollection<TaskModel> questions { get; set; }

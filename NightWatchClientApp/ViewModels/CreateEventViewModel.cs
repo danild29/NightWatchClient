@@ -14,6 +14,8 @@ public partial class CreateEventViewModel: ObservableObject
 
     [ObservableProperty] private string eventName;
     [ObservableProperty] private string eventDescription;
+    [ObservableProperty] private string startTime = "";
+    [ObservableProperty] private string endTime = "";
 
 
 
@@ -57,7 +59,14 @@ public partial class CreateEventViewModel: ObservableObject
     {
         try
         {
-            var e = await _eventData.CreateEvent(EventName, EventDescription);
+
+            if(string.IsNullOrEmpty(StartTime)) StartTime = DateTime.UtcNow.ToString();
+            if(string.IsNullOrEmpty(EndTime)) EndTime = (DateTime.UtcNow + TimeSpan.FromDays(10)).ToString();
+
+
+            var dto = new CreateEventDto(EventName, EventDescription, StartTime, EndTime);
+
+            var e = await _eventData.CreateEvent(dto);
 
             AquiredEvent(true);
             ManagedEvents.Add(e);

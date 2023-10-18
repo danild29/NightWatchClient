@@ -10,7 +10,7 @@ namespace NightWatchClientApp.Helpers;
 public delegate void UpdateCallback(CancellationToken ct);
 public sealed class BackgroundTask
 {
-    private Task? _task;
+    private Task _task;
     private readonly PeriodicTimer _timer;
     private CancellationTokenSource _cts;
     private UpdateCallback Callback;

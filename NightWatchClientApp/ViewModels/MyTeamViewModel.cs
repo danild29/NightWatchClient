@@ -3,6 +3,7 @@ using NightWatchClientApp.Data.Services;
 using NightWatchClientApp.Data.Settings;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -31,10 +32,20 @@ public partial class MyTeamViewModel: ObservableObject
     [ObservableProperty] private bool hasNoTeam = true;
     partial void OnHasTeamChanged(bool oldValue, bool newValue) => HasNoTeam = !newValue;
 
+    [ObservableProperty] private bool hasEvent = false;
+
+
 
 
     [ObservableProperty] private Team teamModel;
-    private string EventId = "6510c8b6f68a88697b733a36";
+    [ObservableProperty] private EventModel eventModel;
+
+
+    partial void OnEventModelChanged(EventModel value)
+    {
+        HasEvent = value != null;
+    }
+
 
 
     public ITeamData _data { get; }
@@ -42,12 +53,13 @@ public partial class MyTeamViewModel: ObservableObject
 
     private BackgroundTask updater;
     TimeSpan interval = GlobalSettings.IntervalForUpdatingTeam;
+    private readonly IEventData eventData;
 
-    public MyTeamViewModel(ITeamData data, IUserData userData)
+    public MyTeamViewModel(ITeamData data, IUserData userData, IEventData eventData)
     {
         _data = data;
         _userData = userData;
-
+        this.eventData = eventData;
         ConfigureTimer();
     }
 
@@ -56,8 +68,9 @@ public partial class MyTeamViewModel: ObservableObject
         try
         {
             TeamModel = await _userData.GetMyTeam();
-
-            if(TeamModel != null) { 
+            if (!string.IsNullOrEmpty(TeamModel?.eventName))
+                EventModel = await eventData.GetEventByName(TeamModel.eventName);
+            if (TeamModel != null) { 
         
                 updater = new(interval);
                 updater.Start(Update);
@@ -77,10 +90,15 @@ public partial class MyTeamViewModel: ObservableObject
     {
         try
         {
+
+
+
             if (await _data.UpdateTeam(ct) == false) return;
 
             TeamModel = UserAppInfo.TeamData;
             HasTeam = true;
+            if(!string.IsNullOrEmpty(TeamModel?.eventName))
+                EventModel = await eventData.GetEventByName(TeamModel.eventName);
         }
         catch (OperationCanceledException)
         { 
@@ -126,22 +144,25 @@ public partial class MyTeamViewModel: ObservableObject
     [RelayCommand]
     private async Task LogOutTeam()
     {
-
+        InfoModel err = new();
         try
         {
-            var err = await _data.LogOutTeam();
+            err = await _data.LeaveTeam();
 
-            ErrorMessage = err.message;
-            UserAppInfo.TeamData = null;
-            HasTeam = false;
-            await updater.StopTask();
         }
         catch (Exception ex)
         {
-
-            ErrorMessage = ex.Message;
-            TurnLoginMessage = true;
+            err = new() { message = ex.Message };
         }    
+        finally
+        {
+            ErrorMessage = err.message;
+            await updater.StopTask();
+            TurnLoginMessage = true;
+
+            HasTeam = false;
+
+        }
 
     }
 
@@ -176,17 +197,63 @@ public partial class MyTeamViewModel: ObservableObject
     }
 
     [RelayCommand]
+    private async Task LeaveEvent()
+    {
+
+        #warning надо добавить
+
+    }
+
+    [RelayCommand]
+    private async Task DetailsTeam()
+    {
+        await Shell.Current.GoToAsync(nameof(TeamDetailsPage));
+    }
+
+
+    [RelayCommand]
+    private async Task DetailsEvent()
+    {
+        #warning надо добавить
+
+    }
+
+
+    [RelayCommand]
     private async Task GoPlay()
     {
+        string format = "dd.MM.yyyy HH:mm:ss";
+        DateTime start = DateTime.ParseExact(EventModel.Start, format, CultureInfo.InvariantCulture);
+        DateTime end = DateTime.ParseExact(EventModel.End, format, CultureInfo.InvariantCulture);
+
+
+        if (DateTime.UtcNow < start)
+        {
+            string mess = "событие еще не началось";
+            await Shell.Current.DisplayAlert("", mess, "ok");
+
+            return;
+        }
+                
+                
+        if(DateTime.UtcNow > end)
+        {
+            string mess = "событие уже закончилось";
+            await Shell.Current.DisplayAlert("", mess, "ok");
+            return;
+        }
+
+        
         try
         {
+
             await Shell.Current.GoToAsync("///" + nameof(PlayPage), true, new Dictionary<string, object>
             {
-                {nameof(EventId), EventId }
+                {nameof(EventId), EventModel._id }
             });
 
         }
-        catch (Exception ex)
+        catch (Exception)
         {
 
             throw;
@@ -206,11 +273,7 @@ public partial class MyTeamViewModel: ObservableObject
 
     //}
 
-    //private void StartGame(object sender, EventArgs e)
-    //{
 
-
-    //}
 
 
 }

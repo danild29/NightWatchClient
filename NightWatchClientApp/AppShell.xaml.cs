@@ -20,6 +20,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(EventDetailsPage), typeof(EventDetailsPage));
 		Routing.RegisterRoute(nameof(ManageEventPage), typeof(ManageEventPage));
 		Routing.RegisterRoute(nameof(TeamsInEventPage), typeof(TeamsInEventPage));
+		Routing.RegisterRoute(nameof(TeamDetailsPage), typeof(TeamDetailsPage));
 
         IsVisibleEvents = true;
         BindingContext = this;

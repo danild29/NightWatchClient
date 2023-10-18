@@ -18,6 +18,7 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
     [ObservableProperty] private Team teamModel;
     [ObservableProperty] private EventModel eventModel;
     [ObservableProperty] private TaskModel currentTask;
+    [ObservableProperty] private bool isCompleted;
 
 
     [ObservableProperty] private string answer;
@@ -49,6 +50,12 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
         {
             InfoMessage = ex.Message;
         }
+    }
+
+    [RelayCommand]
+    private async Task GoBack()
+    {
+        await Shell.Current.GoToAsync("//MainPage");
     }
 
 

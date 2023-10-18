@@ -17,7 +17,7 @@ public interface IEventData
 { 
     public IEventManager EventManager { get; set; }
 
-    Task<EventModel> CreateEvent(string name, string description);
+    Task<EventModel> CreateEvent(CreateEventDto createEventDto);
     Task<TaskModel> AddQuestionToEvent(string eventId, TaskModel question);
     Task<EventModel> GetEvent(string eventId);
     Task<IEnumerable<EventModel>> GetEventsByHostId(string eventId);
@@ -26,6 +26,7 @@ public interface IEventData
     Task<InfoModel> KickTeamFromEvent(string teamId, string eventId);
     Task<InfoModel> DeleteEvent(string eventId);
 
+    Task<EventModel> GetEventByName(string name);
 }
 
 public sealed class EventData : IEventData
@@ -79,10 +80,10 @@ public sealed class EventData : IEventData
 
     
     
-    public async Task<EventModel> CreateEvent(string name, string description)
+    public async Task<EventModel> CreateEvent(CreateEventDto createEventDto)
     {
 
-        string json = JsonSerializer.Serialize(new { name, description });
+        string json = JsonSerializer.Serialize(new { createEventDto.name, createEventDto.description, createEventDto.start, createEventDto.end });
 
         var res = (await SendPostRequest<EventTransfer>("new/" + UserAppInfo.UserData.Id, json)).Event;
         EventManager.AddEvent(res);
@@ -144,5 +145,10 @@ public sealed class EventData : IEventData
         return JsonSerializer.Deserialize<T>(result, CaseInsensitive);
     }
 
+    public async Task<EventModel> GetEventByName(string name)
+    {
+        var res = await GetAllEvents();
+        return res.Where(x => x.name == name).Single();
+    }
 }
 

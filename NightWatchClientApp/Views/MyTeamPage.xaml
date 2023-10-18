@@ -34,12 +34,12 @@
                            Margin="53,15,54,0"/>
                         <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
                             <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
-                            <Entry Placeholder="Идентификатор команды" Text="{Binding LogTeamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                            <Entry TextColor="Black" Placeholder="Идентификатор команды" Text="{Binding LogTeamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
                                    WidthRequest="282" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
                             <Image Source="passwordico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
-                            <Entry Placeholder="Пароль" Text="{Binding LogTeamPassword}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                            <Entry TextColor="Black" Placeholder="Пароль" Text="{Binding LogTeamPassword}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
                                   WidthRequest="282" />
                         </StackLayout>
                         <Button Text="Присоединиться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,87,15"
@@ -62,12 +62,12 @@
                Margin="53,28,54,0"/>
                         <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
                             <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
-                            <Entry Placeholder="Название команды" Text="{Binding CreateTeamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                            <Entry TextColor="Black"  Placeholder="Название команды" Text="{Binding CreateTeamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
                        WidthRequest="282" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
                             <Image Source="passwordico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
-                            <Entry Placeholder="Пароль" Text="{Binding CreateTeamPassword}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                            <Entry TextColor="Black" Placeholder="Пароль" Text="{Binding CreateTeamPassword}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
                       WidthRequest="282" />
                         </StackLayout>
                         <Button Text="Создать" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,87,15"
@@ -96,7 +96,7 @@
                     </StackLayout>
                 </Frame>
                 
-                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
+                <Frame IsVisible="{Binding HasEvent}" BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
                     <StackLayout>
                         <Label Text="Вы записаны на игру" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 10, 58, 0"/>
@@ -113,7 +113,7 @@
                         </Button>
 
                         <!--Пофиксить отображение названия команды-->
-                        <Label Text="{Binding TeamModel.eventName}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                        <Label Text="{Binding EventModel.name}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" Margin="52, 11, 52, 0"/>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="95,12,95,0">
@@ -128,20 +128,20 @@
                             <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Margin="0,5,0,0">
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
-                                    <Label Text="Авторы" CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                    <Label Text="{Binding EventModel.description}" CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
-                                    <Label Text="Код мероприятия"  CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                    <Label Text="{Binding EventModel.Start}"  CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
-                                    <Label Text="Город" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                    <Label Text="{Binding EventModel.End}" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
                                          VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
+                                <!--<StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
                                     <Label Text="Километраж" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
                                           VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
@@ -150,7 +150,7 @@
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
                                     <Label Text="Стоимость" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
                                          VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                                </StackLayout>
+                                </StackLayout>-->
                             </StackLayout>
                             <Image Source="missphoto.svg" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" Margin="0,10,24,0"/>
                         </StackLayout>
@@ -158,6 +158,7 @@
                         <!--Здесь нужно добавить кнопку чтобы отписаться от мероприятия-->
                         <StackLayout Orientation="Horizontal" Margin="0,11,0,15">
                             <Button Text="Отписаться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="24,0,68,0"
+                                        Command="{Binding LeaveEventCommand}"
                                         CornerRadius="20" WidthRequest="131">
                                 <Button.Background>
                                     <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
@@ -168,7 +169,8 @@
                             </Button>
                             
                             <!--Подробнее о мероприятии-->
-                            <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0"
+                            <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0" 
+                                    Command="{Binding DetailsEventCommand}"
                                         CornerRadius="20" HorizontalOptions="EndAndExpand" WidthRequest="131">
                                 <Button.Background>
                                     <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
@@ -182,9 +184,12 @@
                         
                     </StackLayout>
                     
-                    <!--Окно "Ваша команда"-->
                     
                 </Frame>
+                
+                
+                
+                    <!--Окно "Ваша команда"-->
                 <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,25,15,0" Padding="0">
                     <StackLayout>
                         <Label Text="Ваша команда" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
@@ -235,6 +240,7 @@
                         
                         <!--Здесь нужно добавить кнопку подробнее о своей команде-->
                         <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,27,88,0"
+                                Command="{Binding DetailsTeamCommand}"
                                      CornerRadius="20">
                             <Button.Background>
                                 <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
@@ -262,97 +268,5 @@
         </Grid>
     </ContentPage.Content>
     
-            <!--   моя команда --><!--
-            <StackLayout Orientation="Vertical" Margin="10,20, 0,0" IsVisible="{Binding HasTeam}">
-
-                <StackLayout>
-                    <Label Text="вы записаны на мероприятие : "/>
-                    <Label Text="{Binding TeamModel.eventName}"/>
-                </StackLayout>
-                
-                <Button Text="play" Command="{Binding GoPlayCommand}"/>
-                <Button Text="log out" Command="{Binding LogOutTeamCommand}"/>
-                <StackLayout Orientation="Vertical">
-                    --><!--<Button Text="Выйти" Clicked="LeaveTeam"/>--><!--
-                    <Label Text="Ваша команда :"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="имя-"/>
-                        <Label Text="{Binding TeamModel.teamName}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="пароль-"/>
-                        <Label Text="{Binding TeamModel.password}"/>
-                    </StackLayout>
-
-                    <Label Text="{Binding TeamModel.members.Count}"/>
-                </StackLayout>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-
-                    --><!--<Image Source="{Binding Name}" Aspect="AspectFill"/>--><!--
-
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="AUTO" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Row="0" Text="{Binding TeamModel.captain.Name}" FontSize="24" FontFamily="RobotoBold" />
-                        <Label Grid.Row="1" Text="{Binding TeamModel.captain.EMail}" FontSize="24" FontFamily="RobotoBold" />
-
-                    </Grid>
-                </Grid>
-                <RefreshView>
-                    --><!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">--><!--
-                <CollectionView ItemsSource="{Binding TeamModel.members}" SelectionMode="None" >
-
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
-                    </CollectionView.ItemsLayout>
-
-                    
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="m:User">
-                            <Frame MinimumHeightRequest="315">
-                                
-                                --><!--<Frame.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
-                                        CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>--><!--
-                                
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                
-                                    --><!--<Image Source="{Binding Name}" Aspect="AspectFill"/>--><!--
-
-                                    <Grid Grid.Column="1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="AUTO" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-
-                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="24" FontFamily="RobotoBold" />
-                                        <Label Grid.Row="1" Text="{Binding EMail}" FontSize="24" FontFamily="RobotoBold" />
-                                    
-                                    </Grid>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-                
-                
-            </StackLayout>
-
-        </StackLayout>
-    </ContentPage.Content>-->
+            
 </ContentPage>
