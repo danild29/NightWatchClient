@@ -7,6 +7,10 @@ public partial class ProfilePage : ContentPage
 	public ProfilePage()
 	{
 		InitializeComponent();
+
+        MainBackground.Source = ImageSource.FromResource("NightWatchClientApp.Resources.Background.background.jpg");
+        MainBackground.Aspect = Aspect.Fill;
+
         BindingContext = ServiceHelper.GetService<ProfileViewModel>();
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs args)

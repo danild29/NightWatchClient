@@ -18,7 +18,7 @@
 
     <TabBar Route="MainPage">
         
-        <Tab Icon="homeico.svg" Title="Главная" NavigationPage.HasNavigationBar="false" IsVisible="{Binding IsVisibleEvents}" >
+        <Tab Icon="wrenchico.svg" Title="Создать" NavigationPage.HasNavigationBar="false" IsVisible="{Binding IsVisibleEvents}" >
             <ShellContent ContentTemplate="{DataTemplate v:CreateEventPage}" />
         </Tab>
 

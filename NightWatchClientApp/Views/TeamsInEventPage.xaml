@@ -9,46 +9,109 @@
 
     <StackLayout>
 
-        <Label Text="{Binding Message}" FontSize="Body" />
-        <Grid RowDefinitions="*" ColumnDefinitions="*">
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="teamico.svg" Margin="50,3,15,3"/>
+                        <Label Text="Команды в игре" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                 Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout>
+                        <Label Text="Пригласить новую команду" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                Margin="53,14,54,0"/>
 
-            <CollectionView ItemsSource="{Binding EventModel.members}"  SelectionMode="None" HeightRequest="650" 
-                                        Grid.Row="0" Grid.Column="0">
+                        <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                            <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry TextColor="Black"  Placeholder="ID команды" Text="{Binding TeamId}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+            WidthRequest="282" />
+                        </StackLayout>
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
+                        <Button Text="Пригласить" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,24,88,15"
+                              CornerRadius="20" Command="{Binding AddTeamCommand}" >
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:Team">
-                        <Frame MinimumHeightRequest="315">
+                    </StackLayout>
+                </Frame>
 
-                            <!--<Frame.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
-                                        CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>-->
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout>
+                        <Label Text="Все участвующие команды" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                    Margin="53,14,54,0"/>
 
-                            <StackLayout Orientation="Horizontal">
-                                <StackLayout>
-                                    <Label Text="{Binding teamName}" FontSize="24" FontFamily="RobotoBold" />
-                                    <Label Text="|||" FontSize="24" FontFamily="RobotoBold" />
-                                    <Label Text="{Binding _id}" FontSize="24" FontFamily="RobotoBold" />
-                                </StackLayout>
-                                <StackLayout>
-                                    <Button Text="выгнать" BackgroundColor="Black" 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
-                                    CommandParameter="{Binding .}"/>
-                                </StackLayout>
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        <Grid RowDefinitions="*" ColumnDefinitions="*" Margin="15">
+
+                            <CollectionView ItemsSource="{Binding EventModel.members}"  SelectionMode="None" HeightRequest="270" 
+                                Grid.Row="0" Grid.Column="0">
+
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="m:Team">
+                                        <Frame MinimumHeightRequest="10">
+
+                                            <!--<Frame.GestureRecognizers>
+                        <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
+                                CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>-->
+
+                                            <StackLayout>
+                                                <StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Название - " TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                                                      Margin="0,0,0,0"/>
+                                                        <Label Text="{Binding teamName}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                                                                        Margin="0,0,0,0"/>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="ID - " TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                                                                         Margin="0,0,0,0"/>
+                                                        <Label Text="{Binding _id}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                                                                           Margin="0,0,0,0"/>
+                                                    </StackLayout>
+                                                    
+                                                    <!--<Label Text="|||" FontSize="24" FontFamily="RobotoBold" />-->
+                                                    
+                                                </StackLayout>
+                                                <StackLayout>
+                                                    <Button Text="Выгнать" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="48,10,48,0"
+                                                            CornerRadius="20" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
+                                                                    CommandParameter="{Binding .}" >
+                                                        <Button.Background>
+                                                            <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                                                <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                                                <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                                            </LinearGradientBrush>
+                                                        </Button.Background>
+                                                    </Button>
+                                                    <!--<Button Text="выгнать" BackgroundColor="Black" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TeamsInEventViewModel}}, Path=RemoveTeamCommand}"
+                            CommandParameter="{Binding .}"/>-->
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
         </Grid>
-        <Entry TextColor="White" Text="{Binding TeamId}" 
-                           Placeholder="id новой команды" HorizontalOptions="FillAndExpand"/>
 
-        <Button  Text="пригласить команду" Command="{Binding AddTeamCommand}"/>
+        <Label Text="{Binding Message}" FontSize="Body" />
     </StackLayout>
 </ContentPage>

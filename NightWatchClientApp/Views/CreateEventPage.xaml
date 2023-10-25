@@ -8,8 +8,171 @@
              Shell.NavBarIsVisible="false">
 
     <ContentPage.Content>
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="wrenchico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Редактор" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Entry Placeholder="Поиск мероприятия" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+               Margin="24,0,0,0" WidthRequest="282"/>
+                        <Image Source="searchico.svg" Margin="21,7,7,7"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout>
+                        <Label Text="Ваши мероприятия" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                             Margin="53,14,54,0"/>
+
+                        <Label Text="У вас пока нет созданных мероприятий" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                  Margin="53,40,54,40" IsVisible="{Binding NoHaveEvent}"/>
+
+                        <StackLayout Orientation="Horizontal" IsVisible="{Binding HaveEvent}">
+                            <Image Source="arrowico.svg" Rotation="180" Scale="2" Margin="15,15,0,0" Opacity="0.5"/>
+                            <Grid RowDefinitions="*" ColumnDefinitions="*" Margin="0" Padding="0" >
+
+                            <CollectionView ItemsSource="{Binding ManagedEvents}"  SelectionMode="None" Margin="5,0,5,0" HeightRequest="135" WidthRequest="290"
+                        Grid.Row="0" Grid.Column="0" Background="white">
+
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="m:EventModel">
+                                        <Frame Margin="15" Background="White">
+
+                                            <!--<Frame.Background>
+                                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                                </LinearGradientBrush>
+                                            </Frame.Background>-->
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateEventViewModel}}, Path=GoToManageEventCommand}"
+                            CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+
+                                            <StackLayout Orientation="Vertical" Padding="0">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Название - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                        <Label Text="{Binding name}" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Vertical" Margin="0,15,0,0">
+                                                        <Label Text="ID - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                        <Label Text="{Binding _id}" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                    </StackLayout>
+
+                                                </StackLayout>
+                                        </Frame>
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+                        </Grid>
+                            <Image Source="arrowico.svg" Rotation="0" Scale="2" Margin="0,15,15,0" Opacity="0.5"/>
+                        </StackLayout>
+
+                        
+
+                        <Button Text="Обновить" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,88,15"
+                     CornerRadius="20" Command="{Binding LoadEventsCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout>
+                        <Label Text="Создать мероприятие" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                            Margin="53,14,54,0"/>
+                        <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
+                            <Image Source="teamnameico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry TextColor="Black"  Placeholder="Название мероприятия" Text="{Binding EventName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                    WidthRequest="282" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
+                            <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
+                            <Entry TextColor="Black"  Placeholder="Описание мероприятия" Text="{Binding EventDescription}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                    WidthRequest="282" />
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="88,12,88,0">
+                            <Image Source="nightico.svg" Margin="0,0,15,0"/>
+                            <Image Source="dayico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                            <Image Source="vehicleico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                            <Image Source="phoneico.svg" Margin="0,0,15,0"/>
+                            <Image Source="clothesico.svg" Margin="0,0,0,0"/>
+                        </StackLayout>
+
+                        <Button Text="Создать" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,24,88,15"
+                                                      CornerRadius="20" Command="{Binding CreateEventCommand}" >
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                    </StackLayout>
+                </Frame>
+
+                
+
+                <!--<Grid RowDefinitions="*" ColumnDefinitions="*" IsVisible="{Binding HaveEvent}" Margin="15">
+
+                    <CollectionView ItemsSource="{Binding ManagedEvents}"  SelectionMode="None" HeightRequest="650" 
+                        Grid.Row="0" Grid.Column="0">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:EventModel">
+                                <Frame MinimumHeightRequest="315">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateEventViewModel}}, Path=GoToManageEventCommand}"
+                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="название=" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Text="{Binding name}" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Text="    айди=" FontSize="24" FontFamily="RobotoBold" />
+                                        <Label Text="{Binding _id}" FontSize="24" FontFamily="RobotoBold" />
+
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>-->
+            </StackLayout>
+        </Grid>
         
-        <StackLayout Padding="20">
+        
+        <!--<StackLayout Padding="20">
             <Label TextColor="White" Text="{Binding Error}" HorizontalOptions="FillAndExpand"/>
             <ActivityIndicator IsRunning="False" />
             
@@ -65,6 +228,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Grid>
-        </StackLayout>
+        </StackLayout>-->
     </ContentPage.Content>
 </ContentPage>

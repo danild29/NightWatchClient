@@ -30,7 +30,7 @@
 
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0" HeightRequest="222">
                     <StackLayout>
-                        <Label Text="Присоединиться к существующей команде" TextColor="{StaticResource NightWatchBlue}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        <Label Text="Присоединиться к существующей команде" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
                            Margin="53,15,54,0"/>
                         <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
                             <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
@@ -58,7 +58,7 @@
 
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,60,15,0" CornerRadius="30" Padding="0">
                     <StackLayout>
-                        <Label Text="Создать команду" TextColor="{StaticResource NightWatchBlue}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        <Label Text="Создать команду" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
                Margin="53,28,54,0"/>
                         <StackLayout Orientation="Horizontal" Margin="0,6,0,0">
                             <Image Source="teamidico.svg" Margin="27,8,7,0" VerticalOptions="CenterAndExpand"/>
@@ -83,7 +83,7 @@
 
                 </Frame>
                 
-                <Label Text="{Binding ErrorMessage}"/>
+                <!--<Label Text="{Binding ErrorMessage}"/>-->
                 
             </StackLayout>
 
@@ -98,9 +98,9 @@
                 
                 <Frame IsVisible="{Binding HasEvent}" BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
                     <StackLayout>
-                        <Label Text="Вы записаны на игру" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                        <Label Text="Вы записаны на игру" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 10, 58, 0"/>
-                        <Label Text="Игра уже началась" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                        <Label Text="Игра уже началась" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 0, 58, 0"/>
                         <Button Text="Играть" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="67,11,67,0"
                                 CornerRadius="20" Command="{Binding GoPlayCommand}">
@@ -113,7 +113,7 @@
                         </Button>
 
                         <!--Пофиксить отображение названия команды-->
-                        <Label Text="{Binding EventModel.name}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                        <Label Text="{Binding EventModel.name}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" Margin="52, 11, 52, 0"/>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="95,12,95,0">
@@ -128,17 +128,17 @@
                             <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Margin="0,5,0,0">
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
-                                    <Label Text="{Binding EventModel.description}" CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                    <Label Text="{Binding EventModel.description}" CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
-                                    <Label Text="{Binding EventModel.Start}"  CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                    <Label Text="{Binding EventModel.Start}"  CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
-                                    <Label Text="{Binding EventModel.End}" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}"
+                                    <Label Text="{Binding EventModel.End}" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
                                          VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <!--<StackLayout Orientation="Horizontal" Margin="0,0,0,3">
@@ -192,18 +192,18 @@
                     <!--Окно "Ваша команда"-->
                 <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,25,15,0" Padding="0">
                     <StackLayout>
-                        <Label Text="Ваша команда" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                        <Label Text="Ваша команда" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                                  HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 10, 58, 0"/>
 
                         <!--Имя команды-->
                         <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                             <Image Source="userico.svg" Margin="24,0,3,0" VerticalOptions="CenterAndExpand"/>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding TeamModel.teamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                <Label Text="{Binding TeamModel.teamName}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                                          HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
-                                <Label Text="{Binding TeamModel.members.Count}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                <Label Text="{Binding TeamModel.members.Count}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
-                                <Label Text="/8" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                <Label Text="/8" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
                             </StackLayout>
                         </StackLayout>
@@ -222,7 +222,7 @@
                         <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                             <Image Source="lockico.svg" Margin="24,0,3,0" VerticalOptions="CenterAndExpand"/>
                             <StackLayout Margin="0,0,0,0">
-                                <Label Text="{Binding TeamModel.password}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchBlue}" VerticalTextAlignment="Center"
+                                <Label Text="{Binding TeamModel.password}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
                             </StackLayout>
                         </StackLayout>

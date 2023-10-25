@@ -6,25 +6,35 @@
              x:DataType="vm:AllEventsViewModel"
              x:Class="NightWatchClientApp.Views.AllEventsPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="AllEventsPage">
+             Shell.NavBarIsVisible="false">
     
     <ContentPage.Content>
 
         <Grid>
             <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
             <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="listico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Мероприятия" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+                
                 <Label Text="{Binding ErrorMessage}" />
 
                 <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">
-                    <CollectionView ItemsSource="{Binding EventList}" SelectionMode="None" >
+
+                    <CollectionView ItemsSource="{Binding EventList}" SelectionMode="None" Margin="0">
 
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                            <LinearItemsLayout ItemSpacing="30" Orientation="Vertical"/>
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:EventModel">
-                                <Frame MinimumHeightRequest="315">
+                                <StackLayout>
+                                    <Frame MinimumHeightRequest="180" Margin="15,0,15,0" CornerRadius="30" Padding="0">
 
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
@@ -32,26 +42,38 @@
                                             CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="2*" />
-                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Padding="0">
+                                            <Label Text="{Binding name}" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                                 Margin="30,15,0,0"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding description}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                                   Margin="30,15,0,0"/>
+                                                <Image Source="{Binding Image}" Margin="60,0,30,0" Scale="1.25" HorizontalOptions="EndAndExpand"/>
+                                            </StackLayout>
 
-                                        <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="30,50,0,0">
+                                                    <Image Source="nightico.svg" Margin="0,0,15,0"/>
+                                                    <Image Source="dayico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                                                    <Image Source="vehicleico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                                                    <Image Source="phoneico.svg" Margin="0,0,15,0"/>
+                                                    <Image Source="clothesico.svg" Margin="0,0,0,0"/>
+                                                </StackLayout>
+                                                <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,60,15,15" WidthRequest="110"
+                                                                 CornerRadius="20" >
+                                                    <Button.Background>
+                                                        <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                                            <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                                            <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+                                            </StackLayout>
 
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="AUTO" />
-                                                <RowDefinition Height="*" />
-                                            </Grid.RowDefinitions>
-
-                                            <Label Grid.Row="0" Text="{Binding name}" FontSize="24" FontFamily="RobotoBold" />
-                                            <Label Grid.Row="1" Text="{Binding description}" FontSize="24" FontFamily="RobotoBold" />
-
-                                        </Grid>
-                                    </Grid>
-                                </Frame>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                                
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

@@ -4,18 +4,68 @@
              x:Class="NightWatchClientApp.Views.EventDetailsPage"
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
              x:DataType="vm:EventDetailsViewModel"
-             NavigationPage.HasNavigationBar="false">
+             NavigationPage.HasNavigationBar="false"
+             Shell.NavBarIsVisible="false">
     
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            
-            <Label Text="{Binding EventModel._id}" />
-            <Label Text="{Binding EventModel.name}" />
-            <Label Text="{Binding EventModel.description}" />
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="infoico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Об игре" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Margin="15,30,15,0" Padding="0">
+                    <StackLayout Margin="0,0,0,0" Padding="0">
+                        <StackLayout Orientation="Horizontal" Margin="15,15,0,15">
+                            <Label Text="Название мероприятия - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <Label Text="{Binding EventModel.name}" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="15,0,0,15">
+                            <Label Text="Описание - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <Label Text="{Binding EventModel.description}" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="15,0,0,0">
+                            <Label Text="ID - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <Label Text="{Binding EventModel._id}" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="88,15,88,15">
+                            <Image Source="nightico.svg" Margin="0,0,15,0"/>
+                            <Image Source="dayico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                            <Image Source="vehicleico.svg" Margin="0,0,15,0" Opacity="0.5"/>
+                            <Image Source="phoneico.svg" Margin="0,0,15,0"/>
+                            <Image Source="clothesico.svg" Margin="0,0,0,0"/>
+                        </StackLayout>
+
+                        <Button Text="Записаться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,88,15"
+                            CornerRadius="20" Command="{Binding JoinEventCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                    </StackLayout>
 
 
-            <Button Text="зарегаться" Command="{Binding JoinEventCommand}"/>
-        </StackLayout>
+                </Frame>
+
+                <!--<Label Text="{Binding EventModel._id}" />
+                <Label Text="{Binding EventModel.name}" />
+                <Label Text="{Binding EventModel.description}" />-->
+
+
+                <!--<Button Text="зарегаться" Command="{Binding JoinEventCommand}"/>-->
+            </StackLayout>
+        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>
 

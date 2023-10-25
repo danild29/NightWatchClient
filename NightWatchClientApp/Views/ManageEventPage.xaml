@@ -8,69 +8,98 @@
              Shell.NavBarIsVisible="false">
 
 
- 
-    <StackLayout>
-        <Label TextColor="White" Text="{Binding ErrorMessage}" HorizontalOptions="FillAndExpand"/>
 
+    <Grid>
+        <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+        <StackLayout>
 
-        <Button Text="посмотреть команды" Command="{Binding GoToTeamsInEventCommand}"/>
-        <StackLayout VerticalOptions="Center" >
+            <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Image Source="homeico.svg" Margin="78,3,15,3"/>
+                    <Label Text="Управление" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        Margin="0,3,78,3"/>
+                </StackLayout>
+            </Frame>
 
+            <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                <StackLayout>
+                    <Label Text="Название мероприятия" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                             Margin="30,14,54,0"/>
+                    <Label Text="{Binding EventModel.name}" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                         Margin="30,0,54,0"/>
+                    <Label Text="Описание" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                            Margin="30,10,54,0"/>
+                    <Label Text="{Binding EventModel.description}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
+                         Margin="30,0,54,0"/>
+                    <Button Text="Посмотреть команды" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="175,6,24,15"
+            CornerRadius="20" Command="{Binding GoToTeamsInEventCommand}">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackLayout>
+            </Frame>
 
-            <StackLayout Orientation="Vertical"  BackgroundColor="#02040F" >
+            <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                <StackLayout>
+                    <Label Text="Вопросы" TextColor="{StaticResource NightWatchRegular}" FontSize="24" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+     Margin="53,14,54,0"/>
 
-                <Label TextColor="White" Text="{Binding EventModel.name}"/>
-                <Label TextColor="White" Text="{Binding EventModel.description}" />
+                    <Grid RowDefinitions="*" ColumnDefinitions="*" Margin="15">
 
-            </StackLayout>
-        </StackLayout>
-        <Label Margin="30" Text="вопросы: " FontSize="24" FontFamily="RobotoBold" />
-
-
-        
-
-        <Grid RowDefinitions="*" ColumnDefinitions="*">
-
-            <CollectionView ItemsSource="{Binding EventModel.questions}"  SelectionMode="None" HeightRequest="650" 
+                        <CollectionView ItemsSource="{Binding EventModel.questions}"  SelectionMode="None" HeightRequest="220" 
                                     Grid.Row="0" Grid.Column="0">
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                            </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:TaskModel">
-                        <Frame MinimumHeightRequest="315">
-
-
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="вопрос: " FontSize="24" FontFamily="RobotoBold" />
-                                <Label Text="{Binding question}" FontSize="24" FontFamily="RobotoBold" />
-                                <Label Text="     ответ:" FontSize="24" FontFamily="RobotoBold" />
-                                <Label Text="{Binding answer}" FontSize="24" FontFamily="RobotoBold" />
-
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
-
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="m:TaskModel">
+                                    <Frame MinimumHeightRequest="10">
 
 
-            <StackLayout Orientation="Horizontal" Padding="20, 0, 30, 0" BackgroundColor="#02040F">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Вопрос - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                            <Label Text="{Binding question}" Margin="0,0,30,0" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                            <Label Text="Ответ - " TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                            <Label Text="{Binding answer}" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
 
-                <Entry TextColor="White" Text="{Binding NewQuestion.question}" Placeholder="вопрос" HorizontalOptions="FillAndExpand"/>
-                <Entry TextColor="White" Text="{Binding NewQuestion.answer}" Placeholder="ответ" HorizontalOptions="FillAndExpand"/>
-                <Entry TextColor="White" Text="{Binding NewQuestion.clue}" Placeholder="посказка" HorizontalOptions="FillAndExpand"/>
+                    <StackLayout Padding="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
 
-            </StackLayout>
-            <Button Text="создать" Command="{Binding CreateTaskCommand}"/>
+
+                        <StackLayout Orientation="Horizontal" Padding="10, 0, 10, 15" BackgroundColor="White">
+
+                            <Entry  Text="{Binding NewQuestion.question}" Placeholder="Вопрос" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
+                            <Entry  Text="{Binding NewQuestion.answer}" Placeholder="Ответ" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
+                            <Entry  Text="{Binding NewQuestion.clue}" Placeholder="Подсказка" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"/>
+
+                        </StackLayout>
+                        <Button Text="Создать вопрос" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="48,0,68,15"
+                                CornerRadius="20" Command="{Binding CreateTaskCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                    <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <Label TextColor="White" Text="{Binding ErrorMessage}" HorizontalOptions="FillAndExpand"/>
+
         </StackLayout>
-
-
-
-    </StackLayout>
-
+    </Grid>
 </ContentPage>

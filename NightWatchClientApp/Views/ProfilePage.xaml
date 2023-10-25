@@ -6,6 +6,54 @@
 
 
     <ContentPage.Content>
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="teamico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Команды" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Margin="15,30,15,0" Padding="0" CornerRadius="25">
+                    <StackLayout Orientation="Horizontal" Padding="0">
+                        <Frame Margin="14,7,0,7" HeightRequest="83" WidthRequest="88" CornerRadius="20" Padding="0">
+                            <Image Source="missprofilephoto.svg" Scale="1.1"/>
+                        </Frame>
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding Name}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="В сети" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
+                                   VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                            
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Button ImageSource="settingsico.svg" Text="Настройки" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+                        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToSettingsCommand}"/>
+
+                <Button ImageSource="vipico.svg" Text="Премиум-доступ" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Opacity="0.5"/>
+
+                <Button ImageSource="keyico.svg" Text="Создать мероприятие" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToCreateEventPageCommand}"/>
+
+                <Button ImageSource="consoleico.svg" Text="О программе" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToAboutProgramCommand}"/>
+
+                <Button ImageSource="quitico.svg" Text="Выйти" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding LogOutCommand}"/>
+
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+
+    <!--<ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <StackLayout Orientation="Vertical">
@@ -25,6 +73,6 @@
         </ScrollView>
 
 
-    </ContentPage.Content>
+    </ContentPage.Content>-->
 
 </ContentPage>

@@ -58,28 +58,38 @@
 	  <None Remove="Resources\Background\background.jpg" />
 	  <None Remove="Resources\Background\bigbackground.jpg" />
 	  <None Remove="Resources\Fonts\RobotoMono.ttf" />
+	  <None Remove="Resources\Images\arrowico.svg" />
 	  <None Remove="Resources\Images\clothesico.svg" />
+	  <None Remove="Resources\Images\consoleico.svg" />
 	  <None Remove="Resources\Images\dayico.svg" />
 	  <None Remove="Resources\Images\dot.svg" />
 	  <None Remove="Resources\Images\homeico.svg" />
+	  <None Remove="Resources\Images\infoico.svg" />
+	  <None Remove="Resources\Images\keyico.svg" />
 	  <None Remove="Resources\Images\listico.svg" />
 	  <None Remove="Resources\Images\lockico.png" />
 	  <None Remove="Resources\Images\lockico.svg" />
 	  <None Remove="Resources\Images\mailico.svg" />
 	  <None Remove="Resources\Images\missphoto.svg" />
+	  <None Remove="Resources\Images\missprofilephoto.svg" />
 	  <None Remove="Resources\Images\nightico.svg" />
 	  <None Remove="Resources\Images\nw_logo.png" />
 	  <None Remove="Resources\Images\nw_logo.svg" />
 	  <None Remove="Resources\Images\passwordico.svg" />
 	  <None Remove="Resources\Images\phoneico.svg" />
+	  <None Remove="Resources\Images\plus.svg" />
 	  <None Remove="Resources\Images\profileicon.png" />
+	  <None Remove="Resources\Images\quitico.svg" />
 	  <None Remove="Resources\Images\repeatico.svg" />
 	  <None Remove="Resources\Images\searchico.svg" />
+	  <None Remove="Resources\Images\settingsico.svg" />
 	  <None Remove="Resources\Images\teamico.svg" />
 	  <None Remove="Resources\Images\teamidico.svg" />
 	  <None Remove="Resources\Images\teamnameico.svg" />
 	  <None Remove="Resources\Images\userico.svg" />
 	  <None Remove="Resources\Images\vehicleico.svg" />
+	  <None Remove="Resources\Images\vipico.svg" />
+	  <None Remove="Resources\Images\wrenchico.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
