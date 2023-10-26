@@ -33,22 +33,22 @@
                     </StackLayout>
                 </Frame>
 
-                <Button ImageSource="settingsico.svg" Text="Настройки" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
-                        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToSettingsCommand}"/>
+                <!--<Button ImageSource="settingsico.svg" Text="Настройки" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+                        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToSettingsCommand}"/>-->
 
-                <Button ImageSource="vipico.svg" Text="Премиум-доступ" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
-        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Opacity="0.5"/>
+                <Button ImageSource="vipico.svg" Text="Премиум-доступ" TextColor="{StaticResource NightWatchRegular}" Command="{Binding GetPremiumCommand}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+        CornerRadius="20" BackgroundColor="White" HeightRequest="51"/>
 
-                <Button ImageSource="keyico.svg" Text="Создать мероприятие" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
+                <!--<Button ImageSource="keyico.svg" Text="Создать мероприятие" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
         CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToCreateEventPageCommand}"/>
 
                 <Button ImageSource="consoleico.svg" Text="О программе" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
-        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToAboutProgramCommand}"/>
+        CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding GoToAboutProgramCommand}"/>-->
 
                 <Button ImageSource="quitico.svg" Text="Выйти" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="59,38,59,0"
         CornerRadius="20" BackgroundColor="White" HeightRequest="51" Command="{Binding LogOutCommand}"/>
 
-
+                <Label Text="{Binding Message}" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

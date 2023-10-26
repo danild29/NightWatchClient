@@ -67,7 +67,15 @@ public partial class MyTeamViewModel: ObservableObject
     {
         try
         {
-            TeamModel = await _userData.GetMyTeam();
+            var info = await _userData.GetMyTeam();
+    
+            if (info != null)
+            {
+                ErrorMessage = info.message;
+                return;
+            }
+
+            TeamModel = UserAppInfo.TeamData;
             if (!string.IsNullOrEmpty(TeamModel?.eventName))
                 EventModel = await eventData.GetEventByName(TeamModel.eventName);
             if (TeamModel != null) { 
@@ -123,6 +131,7 @@ public partial class MyTeamViewModel: ObservableObject
             {
                 TeamModel = UserAppInfo.TeamData;
                 HasTeam = true;
+                updater = new(interval);
                 updater.Start(Update);
             }
             else
@@ -180,6 +189,7 @@ public partial class MyTeamViewModel: ObservableObject
                 DataSaver.SaveToDevice(team);
                 TeamModel = UserAppInfo.TeamData;
                 HasTeam = true;
+                updater = new(interval);
                 updater.Start(Update);
             }
             else
@@ -219,12 +229,17 @@ public partial class MyTeamViewModel: ObservableObject
     }
 
 
+    private DateTime ParseTime(string time)
+    {
+        string format = "dd.MM.yyyy HH:mm:ss";
+        return DateTime.ParseExact(EventModel.Start, format, CultureInfo.InvariantCulture);
+    }
+
     [RelayCommand]
     private async Task GoPlay()
     {
-        string format = "dd.MM.yyyy HH:mm:ss";
-        DateTime start = DateTime.ParseExact(EventModel.Start, format, CultureInfo.InvariantCulture);
-        DateTime end = DateTime.ParseExact(EventModel.End, format, CultureInfo.InvariantCulture);
+        DateTime start = ParseTime(EventModel.Start);
+        DateTime end = ParseTime(EventModel.End);
 
 
         if (DateTime.UtcNow < start)

@@ -71,6 +71,7 @@ public class TeamData : ITeamData, IDisposable
 
     public async Task<InfoModel> LeaveTeam()
     {
+        if(UserAppInfo.TeamData == null) return null;
         var jsonObj = new
         {
             UserAppInfo.TeamData.teamName,

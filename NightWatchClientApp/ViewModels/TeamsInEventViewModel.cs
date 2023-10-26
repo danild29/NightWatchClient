@@ -10,9 +10,9 @@ namespace NightWatchClientApp.ViewModels;
 [QueryProperty(nameof(EventModel), nameof(EventModel))]
 public partial class TeamsInEventViewModel : ObservableObject
 {
-    [ObservableProperty] private string message = "";
     [ObservableProperty] private EventModel eventModel;
     [ObservableProperty] private string teamId;
+    [ObservableProperty] private string message = "";
 
 
     private readonly IEventData _eventData;

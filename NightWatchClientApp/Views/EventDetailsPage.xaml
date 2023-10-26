@@ -42,7 +42,7 @@
                             <Image Source="clothesico.svg" Margin="0,0,0,0"/>
                         </StackLayout>
 
-                        <Button Text="Записаться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,88,15"
+                        <!--<Button Text="Записаться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,6,88,15"
                             CornerRadius="20" Command="{Binding JoinEventCommand}">
                             <Button.Background>
                                 <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
@@ -50,7 +50,7 @@
                                     <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Button.Background>
-                        </Button>
+                        </Button>-->
 
                     </StackLayout>
 

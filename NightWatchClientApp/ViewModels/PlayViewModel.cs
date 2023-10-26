@@ -71,6 +71,7 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
 
             if(m == CorrectAnswer)
             {
+                Answer = "";
                 taskId++;
                 if(taskId < EventModel.questions.Count)
                 {

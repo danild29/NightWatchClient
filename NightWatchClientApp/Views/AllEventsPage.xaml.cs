@@ -11,4 +11,9 @@ public partial class AllEventsPage : ContentPage
 
         BindingContext = ServiceHelper.GetService<AllEventsViewModel>();
     }
+
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        ServiceHelper.GetService<AllEventsViewModel>().TextChangedCommand(e.NewTextValue);
+    }
 }

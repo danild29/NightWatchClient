@@ -23,6 +23,17 @@ Margin="0,3,78,3"/>
                 
                 <Label Text="{Binding ErrorMessage}" />
 
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Image BackgroundColor="Black" Source="searchico.svg" Margin="21,7,7,7"/>
+
+                        <SearchBar TextColor="Black" Placeholder="Поиск мероприятия" TextChanged="SearchBar_TextChanged"/>
+                    </StackLayout>
+                </Frame>
+
+                
+
+
                 <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">
 
                     <CollectionView ItemsSource="{Binding EventList}" SelectionMode="None" Margin="0">
@@ -59,7 +70,7 @@ Margin="0,3,78,3"/>
                                                     <Image Source="phoneico.svg" Margin="0,0,15,0"/>
                                                     <Image Source="clothesico.svg" Margin="0,0,0,0"/>
                                                 </StackLayout>
-                                                <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,60,15,15" WidthRequest="110"
+                                                <!--<Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,60,15,15" WidthRequest="110"
                                                                  CornerRadius="20" >
                                                     <Button.Background>
                                                         <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
@@ -67,7 +78,7 @@ Margin="0,3,78,3"/>
                                                             <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
                                                         </LinearGradientBrush>
                                                     </Button.Background>
-                                                </Button>
+                                                </Button>-->
                                             </StackLayout>
 
                                         </StackLayout>

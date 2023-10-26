@@ -27,6 +27,7 @@
                     </StackLayout>
                 </Frame>
 
+                <Label Text="{Binding ErrorMessage}" />
 
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0" HeightRequest="222">
                     <StackLayout>
@@ -205,6 +206,8 @@
                                         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
                                 <Label Text="/8" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
+                                <Label Text="участников" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
                             </StackLayout>
                         </StackLayout>
                         <StackLayout>
@@ -221,7 +224,9 @@
                         <!--Пароль команды-->
                         <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                             <Image Source="lockico.svg" Margin="24,0,3,0" VerticalOptions="CenterAndExpand"/>
-                            <StackLayout Margin="0,0,0,0">
+                            <StackLayout Margin="0,0,0,0" Orientation="Horizontal">
+                                <Label Text="пароль команды: " FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
                                 <Label Text="{Binding TeamModel.password}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="10,0,0,0" />
                             </StackLayout>

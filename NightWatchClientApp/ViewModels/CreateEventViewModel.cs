@@ -14,11 +14,15 @@ public partial class CreateEventViewModel: ObservableObject
 
     [ObservableProperty] private string eventName;
     [ObservableProperty] private string eventDescription;
-    [ObservableProperty] private string startTime = "";
-    [ObservableProperty] private string endTime = "";
 
 
+    [ObservableProperty] private DateTime selectedDateStart = DateTime.UtcNow;
+    [ObservableProperty] private DateTime selectedDateEnd = DateTime.UtcNow;
 
+    [ObservableProperty] private TimeSpan selectedTimeStart;
+    [ObservableProperty] private TimeSpan selectedTimeEnd;
+
+    
     [ObservableProperty] private bool haveEvent = false;
     [ObservableProperty] private bool noHaveEvent = true;
 
@@ -54,22 +58,28 @@ public partial class CreateEventViewModel: ObservableObject
         }
     }
 
+    private static DateTime ConvertToOneTime(DateTime timeDate, TimeSpan timeSpan)
+    {
+        return new DateTime(timeDate.Year, timeDate.Month, timeDate.Day, timeSpan.Hours, timeSpan.Minutes, 0);
+    }
+
     [RelayCommand]
     private async Task CreateEvent()
     {
         try
         {
 
-            if(string.IsNullOrEmpty(StartTime)) StartTime = DateTime.UtcNow.ToString();
-            if(string.IsNullOrEmpty(EndTime)) EndTime = (DateTime.UtcNow + TimeSpan.FromDays(10)).ToString();
+            
+            var start = ConvertToOneTime(SelectedDateStart, SelectedTimeStart).ToString().ToString();
+            var end = ConvertToOneTime(SelectedDateEnd, SelectedTimeEnd).ToString().ToString();
 
-
-            var dto = new CreateEventDto(EventName, EventDescription, StartTime, EndTime);
+            var dto = new CreateEventDto(EventName, EventDescription, start, end);
 
             var e = await _eventData.CreateEvent(dto);
 
             AquiredEvent(true);
             ManagedEvents.Add(e);
+            Error = "";
 
         }
         catch (Exception ex)

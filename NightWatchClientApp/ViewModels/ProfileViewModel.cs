@@ -10,8 +10,9 @@ namespace NightWatchClientApp.ViewModels;
 public partial class ProfileViewModel: ObservableObject
 {
     [ObservableProperty] public string name = UserAppInfo.UserData.Name;
+    [ObservableProperty] public string message = "";
 
-
+    
 
     public IUserData _userData { get; }
 
@@ -33,7 +34,7 @@ public partial class ProfileViewModel: ObservableObject
     [RelayCommand]
     private void GoToSettings()
     {
-        Name = UserAppInfo.UserData.Name;
+        
     }
 
     [RelayCommand]
@@ -43,16 +44,19 @@ public partial class ProfileViewModel: ObservableObject
     }
 
     [RelayCommand]
-    private void GetPremium()
+    private async Task GetPremium()
     {
 
-        if (UserAppInfo.UserData.roles.Contains("vip"))
+        if (UserAppInfo.UserData.roles is not null && UserAppInfo.UserData.roles.Contains("vip"))
         {
-            App.Current.MainPage.DisplayAlert("уже есть", "уже есть", "ok");
+            await App.Current.MainPage.DisplayAlert("уже есть", "уже есть", "ok");
         }
         else
         {
-            App.Current.MainPage.DisplayAlert("нету", "нету", "ok");
+            InfoModel info = await _userData.GetVip(UserAppInfo.UserData._id);
+            Message = info.message;
+            await Application.Current.MainPage.DisplayAlert(Message, "перезайдите в аккаунт чтобы получить все привелегии", "ok");
+            await LogOut();
         }
     }
 }

@@ -31,7 +31,7 @@
                             Margin="30,10,54,0"/>
                     <Label Text="{Binding EventModel.description}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"
                          Margin="30,0,54,0"/>
-                    <Button Text="Посмотреть команды" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="175,6,24,15"
+                    <Button Text="Посмотреть команды" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="135,6,24,15"
             CornerRadius="20" Command="{Binding GoToTeamsInEventCommand}">
                         <Button.Background>
                             <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
@@ -79,9 +79,9 @@
 
                         <StackLayout Orientation="Horizontal" Padding="10, 0, 10, 15" BackgroundColor="White">
 
-                            <Entry  Text="{Binding NewQuestion.question}" Placeholder="Вопрос" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
-                            <Entry  Text="{Binding NewQuestion.answer}" Placeholder="Ответ" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
-                            <Entry  Text="{Binding NewQuestion.clue}" Placeholder="Подсказка" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"/>
+                            <Entry TextColor="Black" Text="{Binding NewQuestion.question}" Placeholder="Вопрос" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
+                            <Entry TextColor="Black" Text="{Binding NewQuestion.answer}" Placeholder="Ответ" HorizontalOptions="FillAndExpand" Margin="0,0,10,0"/>
+                            <Entry TextColor="Black" Text="{Binding NewQuestion.clue}" Placeholder="Подсказка" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"/>
 
                         </StackLayout>
                         <Button Text="Создать вопрос" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="48,0,68,15"

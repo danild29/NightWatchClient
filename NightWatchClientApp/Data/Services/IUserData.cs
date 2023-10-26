@@ -6,5 +6,6 @@ public interface IUserData
 {
     Task<InfoModel> Login(UserLoginDto user);
     Task<InfoModel> Register(UserRegisterDto user);
-    Task<Team> GetMyTeam();
+    Task<InfoModel> GetMyTeam();
+    Task<InfoModel> GetVip(string userid);
 }

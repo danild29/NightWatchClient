@@ -56,30 +56,31 @@
                             <!--Здесь нужно добавить ввод для почты-->
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="mailico.svg" Margin="20,32,6,0"/>
-                                <Entry Placeholder="Почта" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserLoginName}" Margin="0,24,43,0"/>
+                                <Entry TextColor="Black" Placeholder="Почта" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserLoginName}" Margin="0,24,43,0"/>
                             </StackLayout>
                         </Grid>
 
                         <!--Это основной ник-нейм по которому будет выполняться вход-->
                         <StackLayout Orientation="Horizontal">
                             <Image Source="userico.svg" Margin="20,22,6,0"/>
-                            <Entry Placeholder="Ник-нейм" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserNickName}" Margin="0,12,43,0"/>
+                            <Entry TextColor="Black" Placeholder="Ник-нейм" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserNickName}" Margin="0,12,43,0"/>
                         </StackLayout>
 
                         <!--Здесь нужно сравнивать два введенных пароля-->
                         <StackLayout Orientation="Horizontal">
                             <Image Source="lockico.svg" Margin="20,22,6,0"/>
-                            <Entry Placeholder="Пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
+                            <Entry TextColor="Black" Placeholder="Пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
                         </StackLayout>
 
                         <!--Здесь нужно сравнивать два введенных пароля-->
                         <StackLayout Orientation="Horizontal">
                             <Image Source="repeatico.svg" Margin="20,22,6,0"/>
-                            <Entry Placeholder="Повторите пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
+                            <Entry TextColor="Black" Placeholder="Повторите пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserRepeatPassword}" Margin="0,12,43,0"/>
                         </StackLayout>
 
-                        <Label Text="{Binding LoginMessage, Mode=OneWay}" IsVisible="{Binding TurnLoginMessage, Mode=OneWay}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
+                        <Label Text="{Binding LoginMessage}" IsVisible="{Binding TurnLoginMessage}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
                                HorizontalTextAlignment="Center" CharacterSpacing="-1.25" LineHeight="1"  Margin="44,0,43,0"/>
+                        
                         <Button Text="Зарегистрироваться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="43,12,43,0"
                                 CornerRadius="20" Command="{Binding RegisterNewUserCommand}">
                             <Button.Background>

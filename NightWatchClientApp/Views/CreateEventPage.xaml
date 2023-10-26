@@ -19,13 +19,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
-                    <StackLayout Orientation="Horizontal">
-                        <Entry Placeholder="Поиск мероприятия" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
-               Margin="24,0,0,0" WidthRequest="282"/>
-                        <Image Source="searchico.svg" Margin="21,7,7,7"/>
-                    </StackLayout>
-                </Frame>
+                
 
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
                     <StackLayout>
@@ -99,6 +93,9 @@
                     </StackLayout>
                 </Frame>
 
+                <Label Text="{Binding Error}"/>
+                
+                        
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
                     <StackLayout>
                         <Label Text="Создать мероприятие" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
@@ -113,7 +110,6 @@
                             <Entry TextColor="Black"  Placeholder="Описание мероприятия" Text="{Binding EventDescription}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
                                     WidthRequest="282" />
                         </StackLayout>
-                        
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="88,12,88,0">
                             <Image Source="nightico.svg" Margin="0,0,15,0"/>
                             <Image Source="dayico.svg" Margin="0,0,15,0" Opacity="0.5"/>
@@ -122,6 +118,23 @@
                             <Image Source="clothesico.svg" Margin="0,0,0,0"/>
                         </StackLayout>
 
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="Center" >
+
+                            <Label TextColor="Black" Text="Начало события" />
+                            <DatePicker Date="{Binding SelectedDateStart}" BackgroundColor="Grey" TextColor="Black" HorizontalOptions="Center" />
+                            <TimePicker Time="{Binding SelectedTimeStart}" Background="Black" HorizontalOptions="Center"/>
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+
+                            <Label TextColor="Black" Text="Конец события" HorizontalTextAlignment="Center" />
+                            <DatePicker Date="{Binding SelectedDateEnd}" BackgroundColor="Grey" TextColor="Black" HorizontalOptions="Center"/>
+                            <TimePicker Time="{Binding SelectedTimeEnd}" Background="Black" HorizontalOptions="Center"/>
+
+                        </StackLayout>
+                        
+                        
                         <Button Text="Создать" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="88,24,88,15"
                                                       CornerRadius="20" Command="{Binding CreateEventCommand}" >
                             <Button.Background>

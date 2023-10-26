@@ -20,6 +20,7 @@ public partial class CreateAccountViewModel : ObservableObject
 
     [ObservableProperty] private string userLoginName;
     [ObservableProperty] private string userPassword;
+    [ObservableProperty] private string userRepeatPassword;
     [ObservableProperty] private string userNickName;
     [ObservableProperty] private string loginMessage;
     [ObservableProperty] private bool turnLoginMessage = false;
@@ -31,6 +32,13 @@ public partial class CreateAccountViewModel : ObservableObject
     [RelayCommand]
     private async Task RegisterNewUser()
     {
+        if(UserPassword != UserRepeatPassword)
+        {
+            LoginMessage = "пароли не совпадают";
+            TurnLoginMessage = true;
+            return;
+        }
+
         TurnLoginMessage = false;
         IsBusy = true;
         UserRegisterDto user = new UserRegisterDto(UserLoginName, UserPassword, UserNickName);

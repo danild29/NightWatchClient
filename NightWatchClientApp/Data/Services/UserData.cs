@@ -1,13 +1,6 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration;
-using Microsoft.Maui.Controls.Shapes;
-using NightWatchClientApp.DevsFeatures;
-using NightWatchClientApp.Models;
-using NightWatchClientApp.Models.DTOs;
-using System;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 
 namespace NightWatchClientApp.Data.Services;
@@ -26,7 +19,7 @@ public class UserData : IUserData, IDisposable
 
     private JsonSerializerOptions CaseInsensitive = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-    private int delay = 1000;
+
 
     public UserData()
     {
@@ -34,7 +27,6 @@ public class UserData : IUserData, IDisposable
 
     public async Task<InfoModel> Login(UserLoginDto user)
     {
-        await Task.Delay(delay);
 
 
         string json = JsonSerializer.Serialize(user);
@@ -72,9 +64,8 @@ public class UserData : IUserData, IDisposable
 
         if (response.IsSuccessStatusCode)
         {
-            var u = JsonSerializer.Deserialize<User>(result, CaseInsensitive);
-            UserAppInfo.UserData = u;
-            return null;
+            UserLoginDto loginDto = new(userDto.name, userDto.password);
+            return await Login(loginDto);
         }
 
         try
@@ -90,38 +81,79 @@ public class UserData : IUserData, IDisposable
         }
     }
 
-    public async Task<Team> GetMyTeam()
+    public async Task<InfoModel> GetMyTeam()
     {
 
         HttpResponseMessage response = await _client.GetAsync($"get-team-by-id/{UserAppInfo.UserData._id}");
         string result = await response.Content.ReadAsStringAsync();
 
+        var info = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
+        if(!string.IsNullOrEmpty(info?.message))
+            return info;
+
+
         if (response.IsSuccessStatusCode)
         {
+
             var u = JsonSerializer.Deserialize<Team>(result, CaseInsensitive);
             UserAppInfo.TeamData = u;
-            return u;
+            return null;
         }
+
+        
+
+
+
+        //"{\"message\":\"Этот пользователь пока не находится ни в какой команде.z\"}"
+
 
         return null;
     }
 
 
-    //public async Task GetVip(UserRegisterDto userDto)
-    //{
-    //    string json = JsonSerializer.Serialize(userDto);
+    public async Task<InfoModel> GetVip(string userid)
+    {
+        try
+        {
+            UserLoginDto admin = new("admin", "admin");
+            string json = JsonSerializer.Serialize(admin);
 
-    //    StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PostAsync("login", data);
 
-    //    HttpResponseMessage response = await _client.PostAsync("register", data);
+            string result = await response.Content.ReadAsStringAsync();
 
-    //    string result = await response.Content.ReadAsStringAsync();
-    //http://localhost:5000/auth/giverole/:userId - выдать привилегию (put)
-    //    {
-    //        "role" : "vip"
 
-    //}
-    //}
+            if (!response.IsSuccessStatusCode) return  new InfoModel("Что-то пошло не так.");
+
+            var u = JsonSerializer.Deserialize<User>(result, CaseInsensitive);
+
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", u.Token);
+
+            string j = JsonSerializer.Serialize(new { role = "vip" });
+
+
+            StringContent info = new StringContent(j, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage userResponse = await _client.PutAsync($"http://213.171.4.235:5000/auth/giverole/{userid}", info);
+
+            string output = await userResponse.Content.ReadAsStringAsync();
+
+            if (userResponse.IsSuccessStatusCode) UserAppInfo.UserData.roles = new List<string> { "vip" };
+
+            return JsonSerializer.Deserialize<InfoModel>(output, CaseInsensitive);
+
+        }
+        catch (Exception ex)
+        {
+            return new InfoModel { message = ex.Message };
+        }
+        finally
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserAppInfo.UserData.Token);
+        }
+    }
 
 
 

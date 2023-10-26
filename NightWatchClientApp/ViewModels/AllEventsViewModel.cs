@@ -1,4 +1,5 @@
-﻿using NightWatchClientApp.Data.Services;
+﻿using CommunityToolkit.Maui.Views;
+using NightWatchClientApp.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,8 +11,9 @@ namespace NightWatchClientApp.ViewModels;
 
 public partial class AllEventsViewModel: ObservableObject
 {
+    public List<EventModel> AllEvents;
 
-    [ObservableProperty] private List<EventModel> eventList;
+    [ObservableProperty] private ObservableCollection<EventModel> eventList;
     [ObservableProperty] public bool isRefreshing = false;
     [ObservableProperty] public string errorMessage = "";
 
@@ -45,7 +47,8 @@ public partial class AllEventsViewModel: ObservableObject
 
             //};
 
-            EventList = await _eventData.GetAllEvents();
+            AllEvents = await _eventData.GetAllEvents();
+            EventList = new ObservableCollection<EventModel>(AllEvents);
         }
         catch (Exception ex)
         {
@@ -78,6 +81,11 @@ public partial class AllEventsViewModel: ObservableObject
     //{
     //    myListEvents.ItemsSource = EventList.Where(s => s.Name.StartsWith(e.NewTextValue));
     //}
+
+    public void TextChangedCommand(string data)
+    {
+        EventList = new(AllEvents.Where(x => x.name.StartsWith(data)).ToList());
+    }
 
     //private void Button_Clicked(object sender, EventArgs e)
     //{
