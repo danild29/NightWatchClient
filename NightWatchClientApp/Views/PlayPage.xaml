@@ -7,7 +7,90 @@
              x:DataType="vm:PlayViewModel"
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="gameico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Вы в игре" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                            Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="{Binding InfoMessage}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 15" MaximumHeightRequest="120"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Информация о мероприятии" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 0"/>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="ID мероприятия - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 5, 0, 0"/>
+                            <Label Text="{Binding EventModel._id}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0, 0"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="ID вашей команды - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 5, 0, 0"/>
+                            <Label Text="{Binding TeamModel._id}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0,15"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Игра идет" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 0"/>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Текущий вопрос - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 5, 0, 0"/>
+                            <Label Text="{Binding CurrentTask.question}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0, 0"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Подсказка - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 5, 0, 0"/>
+                            <Label Text="{Binding CurrentTask.clue}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0,0"/>
+                            
+                        </StackLayout>
+
+                        <Label Text="Ваш ответ" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 5, 58, 0"/>
+                        <Entry Text="{Binding Answer}" Margin="60,0"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Назад" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="30, 15, 0, 15" WidthRequest="110"
+                                     CornerRadius="20" Command="{Binding GoBackCommand}">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                        <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                        <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Text="Отправить" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0, 15, 30, 15" WidthRequest="110" HorizontalOptions="EndAndExpand"
+                                        CornerRadius="20" Command="{Binding SendAnswerCommand}">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="-1,0" EndPoint="1,0">
+                                        <GradientStop Color="{StaticResource NightWatchBlue}" Offset="0.5"/>
+                                        <GradientStop Color="{StaticResource NightWatchPurple}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+        <!--<StackLayout>
 
             <StackLayout Margin="10,20,10,10">
                 <Label Text="{Binding EventModel._id}" FontSize="20"/>
@@ -32,7 +115,7 @@
 
 
             <Button Text="back" Command="{Binding GoBackCommand}"/>
-        </StackLayout>
+        </StackLayout>-->
         
         
         

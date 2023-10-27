@@ -20,15 +20,12 @@
 Margin="0,3,78,3"/>
                     </StackLayout>
                 </Frame>
-                
-                <Label Text="{Binding ErrorMessage}" />
 
-                <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
-                    <StackLayout Orientation="Horizontal">
-                        <Image BackgroundColor="Black" Source="searchico.svg" Margin="21,7,7,7"/>
+                <Label Text="{Binding ErrorMessage}" TextColor="White" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                     Margin="0,0,0,0"/>
 
-                        <SearchBar TextColor="Black" Placeholder="Поиск мероприятия" TextChanged="SearchBar_TextChanged"/>
-                    </StackLayout>
+                <Frame BackgroundColor="White" BorderColor="White" Margin="15,0,15,15" CornerRadius="30" Padding="0">
+                    <SearchBar TextColor="Black" Placeholder="Поиск мероприятия" TextChanged="SearchBar_TextChanged" HeightRequest="55"/>
                 </Frame>
 
                 
@@ -54,16 +51,16 @@ Margin="0,3,78,3"/>
                                     </Frame.GestureRecognizers>
 
                                         <StackLayout Padding="0">
-                                            <Label Text="{Binding name}" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
-                                                 Margin="30,15,0,0"/>
+                                            <Label Text="{Binding name}" TextColor="{StaticResource NightWatchRegular}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                                 Margin="0,15,0,0"/>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding description}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
-                                                   Margin="30,15,0,0"/>
-                                                <Image Source="{Binding Image}" Margin="60,0,30,0" Scale="1.25" HorizontalOptions="EndAndExpand"/>
+                                                <Label Text="{Binding description}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                                   Margin="0,15,0,0"/>
+                                                <!--<Image Source="{Binding Image}" Margin="60,0,30,0" Scale="1.25" HorizontalOptions="EndAndExpand"/>-->
                                             </StackLayout>
 
                                             <StackLayout Orientation="Horizontal">
-                                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="30,50,0,0">
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,50,0,0">
                                                     <Image Source="nightico.svg" Margin="0,0,15,0"/>
                                                     <Image Source="dayico.svg" Margin="0,0,15,0" Opacity="0.5"/>
                                                     <Image Source="vehicleico.svg" Margin="0,0,15,0" Opacity="0.5"/>

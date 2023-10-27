@@ -96,7 +96,7 @@
                Margin="0,3,78,3"/>
                     </StackLayout>
                 </Frame>
-                
+
                 <Frame IsVisible="{Binding HasEvent}" BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
                     <StackLayout>
                         <Label Text="Вы записаны на игру" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
@@ -114,7 +114,7 @@
                         </Button>
 
                         <!--Пофиксить отображение названия команды-->
-                        <Label Text="{Binding EventModel.name}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                        <Label Text="{Binding EventModel.name}" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" Margin="52, 11, 52, 0"/>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="95,12,95,0">
@@ -129,16 +129,22 @@
                             <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Margin="0,5,0,0">
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Описание: " FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
+                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                     <Label Text="{Binding EventModel.description}" CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Начало: " FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
+                                        VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                     <Label Text="{Binding EventModel.Start}"  CharacterSpacing="1" FontSize="12" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
                                            VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0,0,0,3">
                                     <Image Source="dot.svg" Margin="24, 0, 15, 0"/>
+                                    <Label Text="Конец:  " FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
+                                     VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                     <Label Text="{Binding EventModel.End}" FontSize="12" CharacterSpacing="1" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}"
                                          VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>
@@ -153,12 +159,12 @@
                                          VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                 </StackLayout>-->
                             </StackLayout>
-                            <Image Source="missphoto.svg" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" Margin="0,10,24,0"/>
+                            <!--<Image Source="missphoto.svg" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" Margin="0,10,24,0"/>-->
                         </StackLayout>
 
                         <!--Здесь нужно добавить кнопку чтобы отписаться от мероприятия-->
                         <StackLayout Orientation="Horizontal" Margin="0,11,0,15">
-                            <Button Text="Отписаться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="24,0,68,0"
+                            <Button Text="Отписаться" Opacity="0.5" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="24,0,68,0"
                                         Command="{Binding LeaveEventCommand}"
                                         CornerRadius="20" WidthRequest="131">
                                 <Button.Background>
@@ -170,7 +176,7 @@
                             </Button>
                             
                             <!--Подробнее о мероприятии-->
-                            <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0" 
+                            <Button Text="Подробнее" Opacity="0.5" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0" 
                                     Command="{Binding DetailsEventCommand}"
                                         CornerRadius="20" HorizontalOptions="EndAndExpand" WidthRequest="131">
                                 <Button.Background>

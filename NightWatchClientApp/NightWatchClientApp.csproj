@@ -65,6 +65,7 @@
 	  <None Remove="Resources\Images\consoleico.svg" />
 	  <None Remove="Resources\Images\dayico.svg" />
 	  <None Remove="Resources\Images\dot.svg" />
+	  <None Remove="Resources\Images\gameico.svg" />
 	  <None Remove="Resources\Images\homeico.svg" />
 	  <None Remove="Resources\Images\infoico.svg" />
 	  <None Remove="Resources\Images\keyico.svg" />
@@ -85,6 +86,7 @@
 	  <None Remove="Resources\Images\repeatico.svg" />
 	  <None Remove="Resources\Images\searchico.svg" />
 	  <None Remove="Resources\Images\settingsico.svg" />
+	  <None Remove="Resources\Images\statisticico.svg" />
 	  <None Remove="Resources\Images\teamico.svg" />
 	  <None Remove="Resources\Images\teamidico.svg" />
 	  <None Remove="Resources\Images\teamnameico.svg" />

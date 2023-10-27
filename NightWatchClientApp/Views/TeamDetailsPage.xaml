@@ -5,10 +5,130 @@
              xmlns:vm="clr-namespace:NightWatchClientApp.ViewModels"
              xmlns:m="clr-namespace:NightWatchClientApp.Models"
              x:DataType="vm:TeamDetailsViewModel"
-             NavigationPage.HasNavigationBar="false">
+             NavigationPage.HasNavigationBar="false"
+             Shell.NavBarIsVisible="false">
        <!--моя команда-->
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Margin="10,20, 0,0" >
+        <Grid>
+            <Image x:Name="MainBackground" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout>
+                <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Image Source="teamico.svg" Margin="78,3,15,3"/>
+                        <Label Text="Команды" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+               Margin="0,3,78,3"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,30,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Вы записаны на мероприятие" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 0"/>
+                        <Label Text="{Binding TeamModel.eventName}" FontSize="20" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 5, 58, 15"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,15,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Ваша команда" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 0"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Имя - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                    HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 5, 0, 0"/>
+                            <Label Text="{Binding TeamModel.teamName}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                    HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="0, 5, 0, 0"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Пароль - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                        HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0, 0"/>
+                            <Label Text="{Binding TeamModel.password}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                        HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="0, 0, 0, 0"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="0,0,0,15">
+                            <Label Text="Количество игроков - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                        HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0, 0"/>
+                            <Label Text="{Binding TeamModel.members.Count}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                        HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="0, 0, 0, 0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,15,15,0" Padding="0">
+                    <StackLayout>
+                        <Label Text="Капитан команды" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 0"/>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Ник-нейм - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                         HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 5, 0, 0"/>
+                            <Label Text="{Binding TeamModel.captain.Name}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                          HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="0, 5, 0, 0"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="0,0,0,15">
+                            <Label Text="Почта - " FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                         HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="30, 0, 0, 0"/>
+                            <Label Text="{Binding TeamModel.captain.EMail}" FontSize="16" FontFamily="RobotoMono" FontAttributes="None" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Start"
+                            HorizontalTextAlignment="Start" CharacterSpacing="1" Margin="0, 0, 0, 0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="White" CornerRadius="25" Margin="15,15,15,0" Padding="0" HeightRequest="245">
+                    <StackLayout>
+                        <Label Text="Участники команды" FontSize="20" FontFamily="RobotoMono" FontAttributes="Bold" TextColor="{StaticResource NightWatchRegular}" VerticalTextAlignment="Center"
+                          HorizontalTextAlignment="Center" CharacterSpacing="1" Margin="57, 15, 58, 0"/>
+                        <RefreshView>
+                            <CollectionView ItemsSource="{Binding TeamModel.members}" SelectionMode="None" >
+
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                                </CollectionView.ItemsLayout>
+
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="m:User">
+                                        <Frame MinimumHeightRequest="315">
+
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllEventsViewModel}}, Path=GoToDetailsCommand}"
+                        CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="2*" />
+                                                </Grid.ColumnDefinitions>
+
+
+                                                <Image Source="{Binding Name}" Aspect="AspectFill"/>
+
+
+                                                <Grid Grid.Column="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="AUTO" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <Label Grid.Row="0" Text="{Binding Name}" FontSize="24" FontFamily="RobotoBold" />
+                                                    <Label Grid.Row="1" Text="{Binding EMail}" FontSize="24" FontFamily="RobotoBold" />
+
+                                                </Grid>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </RefreshView>
+                    </StackLayout>
+                    
+                </Frame>
+            </StackLayout>
+        </Grid>
+        <!--<StackLayout Orientation="Vertical" Margin="10,20, 0,0" >
 
                 <StackLayout>
                     <Label Text="вы записаны на мероприятие : "/>
@@ -54,7 +174,7 @@
                 </Grid>
                 <RefreshView>
                     
-    <!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">-->
+    --><!--IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadEventsCommand}">--><!--
     
                 <CollectionView ItemsSource="{Binding TeamModel.members}" SelectionMode="None" >
 
@@ -103,7 +223,7 @@
             </RefreshView>
                 
                 
-       </StackLayout>
+       </StackLayout>-->
 
     </ContentPage.Content>
 </ContentPage>

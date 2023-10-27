@@ -238,25 +238,25 @@ public partial class MyTeamViewModel: ObservableObject
     [RelayCommand]
     private async Task GoPlay()
     {
-        DateTime start = ParseTime(EventModel.Start);
-        DateTime end = ParseTime(EventModel.End);
+        //DateTime start = ParseTime(EventModel.Start);
+        //DateTime end = ParseTime(EventModel.End);
 
 
-        if (DateTime.UtcNow < start)
-        {
-            string mess = "событие еще не началось";
-            await Shell.Current.DisplayAlert("", mess, "ok");
+        //if (DateTime.UtcNow < start)
+        //{
+        //    string mess = "событие еще не началось";
+        //    await Shell.Current.DisplayAlert("", mess, "ok");
 
-            return;
-        }
+        //    return;
+        //}
                 
                 
-        if(DateTime.UtcNow > end)
-        {
-            string mess = "событие уже закончилось";
-            await Shell.Current.DisplayAlert("", mess, "ok");
-            return;
-        }
+        //if(DateTime.UtcNow > end)
+        //{
+        //    string mess = "событие уже закончилось";
+        //    await Shell.Current.DisplayAlert("", mess, "ok");
+        //    return;
+        //}
 
         
         try
