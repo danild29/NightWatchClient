@@ -46,7 +46,7 @@ public partial class TeamsInEventViewModel : ObservableObject
         {
             if (selectedTeam != null)
             {
-                InfoModel message =  await _eventData.KickTeamFromEvent(selectedTeam._id, EventModel._id);
+                InfoModel message =  await _eventData.KickTeamFromEvent(selectedTeam.teamName, EventModel._id);
                 Message = message.message;
                 EventModel.members.Remove(selectedTeam); // chteck
             }

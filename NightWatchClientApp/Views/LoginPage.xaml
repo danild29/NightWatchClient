@@ -27,7 +27,7 @@
                         <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="19,12,19,12">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Дозор " TextColor="{StaticResource NightWatchBlue}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="-2" LineHeight="0.85"/>
+                                    <Span Text="Наша игра " TextColor="{StaticResource NightWatchBlue}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="-2" LineHeight="0.85"/>
                                     <Span Text="- это Российская игра флеш-моб в формате ночных поисковых игр, 
                                появившаяся в 2005 году и включающая в себя соревнования по городскому 
                                ориентированию, актёрские и ролевые 

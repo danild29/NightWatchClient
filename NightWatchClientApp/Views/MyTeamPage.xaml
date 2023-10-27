@@ -21,13 +21,13 @@
                 </Frame>
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0">
                     <StackLayout Orientation="Horizontal">
-                        <Entry Placeholder="Поиск команды" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        <Entry TextColor="Black" Placeholder="Поиск команды" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Center" 
                                Margin="24,0,0,0" WidthRequest="282"/>
                         <Image Source="searchico.svg" Margin="21,7,7,7"/>
                     </StackLayout>
                 </Frame>
 
-                <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label Text="{Binding ErrorMessage}" TextColor="Red" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
 
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0" HeightRequest="222">
                     <StackLayout>

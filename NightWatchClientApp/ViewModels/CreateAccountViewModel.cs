@@ -39,7 +39,7 @@ public partial class CreateAccountViewModel : ObservableObject
             return;
         }
 
-        TurnLoginMessage = false;
+        LoginMessage = "";
         IsBusy = true;
         UserRegisterDto user = new UserRegisterDto(UserLoginName, UserPassword, UserNickName);
 
@@ -53,7 +53,16 @@ public partial class CreateAccountViewModel : ObservableObject
         }
         else
         {
-            LoginMessage = er.message;
+            StringBuilder mes = new();
+            
+            mes.AppendLine(er.message);
+
+            foreach(var i in er.errors.errors)
+            {
+                mes.AppendLine(i.msg);
+            }
+
+            LoginMessage =mes.ToString();
             TurnLoginMessage = true;
         }
         IsBusy = false;

@@ -14,7 +14,7 @@ public interface IEventManager
 
     void AddEvent(EventModel eventModel);
     void AddTeam(string eventId, Team team);
-    void RemoveTeam(string eventId, string teamId);
+    void RemoveTeam(string eventId, string teamName);
     void AddTask(string eventId, TaskModel task);
     void Refresh(List<EventModel> list);
     void RemoveEvent();
@@ -36,10 +36,10 @@ public class EventManager : IEventManager
         var e = _events.Find(x => x._id == eventId);
         e.members.Add(team);
     }
-    public void RemoveTeam(string eventId, string teamId)
+    public void RemoveTeam(string eventId, string teamName)
     {
         EventModel r = _events.Find(x => x._id == eventId);
-        r.members.Remove(r.members.First(x => x._id == teamId));
+        r.members.Remove(r.members.First(x => x.teamName == teamName));
     }
 
     public void AddTask(string eventId, TaskModel task)

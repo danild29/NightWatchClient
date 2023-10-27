@@ -27,7 +27,7 @@
                         <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="19,12,19,12">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Дозор " TextColor="{StaticResource NightWatchBlue}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="-2" LineHeight="0.85"/>
+                                    <Span Text="Наща игра " TextColor="{StaticResource NightWatchBlue}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="-2" LineHeight="0.85"/>
                                     <Span Text="- это Российская игра флеш-моб в формате ночных поисковых игр, 
                            появившаяся в 2005 году и включающая в себя соревнования по городскому 
                            ориентированию, актёрские и ролевые 
@@ -47,6 +47,10 @@
                         </Line>
                     </StackLayout>
                 </Frame>
+                
+                
+
+                        
 
                 <Frame BackgroundColor="White" CornerRadius="25" Margin="39,0, 39, 72" Padding="0">
                     <StackLayout>
@@ -77,10 +81,8 @@
                             <Image Source="repeatico.svg" Margin="20,22,6,0"/>
                             <Entry TextColor="Black" Placeholder="Повторите пароль" FontSize="14" FontFamily="RobotoMono" HorizontalOptions="FillAndExpand" Text="{Binding UserRepeatPassword}" Margin="0,12,43,0"/>
                         </StackLayout>
-
-                        <Label Text="{Binding LoginMessage}" IsVisible="{Binding TurnLoginMessage}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
-                               HorizontalTextAlignment="Center" CharacterSpacing="-1.25" LineHeight="1"  Margin="44,0,43,0"/>
-                        
+                        <Label Text="{Binding LoginMessage}" IsVisible="true" TextColor="DarkRed" FontSize="16" FontFamily="RobotoMono" FontAttributes="None"
+                                HorizontalTextAlignment="Center" CharacterSpacing="-1.25" LineHeight="1"  Margin="44,0,43,0"/>
                         <Button Text="Зарегистрироваться" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="43,12,43,0"
                                 CornerRadius="20" Command="{Binding RegisterNewUserCommand}">
                             <Button.Background>

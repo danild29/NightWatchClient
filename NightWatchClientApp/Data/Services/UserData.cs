@@ -47,9 +47,6 @@ public class UserData : IUserData, IDisposable
         return er;
     }
 
-
-
-    //"{\"eMail\":\"glebushnik@gmail.com\",\"password\":\"gleb1234\",\"name\":\"gleb1234\"}"
     public async Task<InfoModel> Register(UserRegisterDto userDto)
     {
 

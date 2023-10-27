@@ -22,7 +22,7 @@ public interface IEventData
     Task<EventModel> GetEvent(string eventId);
     Task<IEnumerable<EventModel>> GetEventsByHostId(string eventId);
     Task<List<EventModel>> GetAllEvents();
-    Task<EventModel> AddTeamToEvent(string teamId, string eventId);
+    Task<EventModel> AddTeamToEvent(string teamName, string eventId);
     Task<InfoModel> KickTeamFromEvent(string teamId, string eventId);
     Task<InfoModel> DeleteEvent(string eventId);
 
@@ -91,19 +91,19 @@ public sealed class EventData : IEventData
     }
 
 
-    public async Task<EventModel> AddTeamToEvent(string teamId, string eventId)
+    public async Task<EventModel> AddTeamToEvent(string teamName, string eventId)
     {
-        string json = JsonSerializer.Serialize(new { teamId, hostId = UserAppInfo.UserData._id });
+        string json = JsonSerializer.Serialize(new { teamName, hostId = UserAppInfo.UserData._id });
 
         var res = (await SendPostRequest<EventTransfer>("addteam/"+eventId, json)).Event;
-        EventManager.AddTeam(res._id, res.members.First(x => x._id == teamId));
+        EventManager.AddTeam(res._id, res.members.First(x => x.teamName == teamName));
         return res;
     }
-    public async Task<InfoModel> KickTeamFromEvent(string teamId, string eventId)
+    public async Task<InfoModel> KickTeamFromEvent(string teamName, string eventId)
     {
-        string json = JsonSerializer.Serialize(new { teamId, hostId = UserAppInfo.UserData._id });
+        string json = JsonSerializer.Serialize(new { teamName, hostId = UserAppInfo.UserData._id });
         var res = (await SendPostRequest<InfoModel>("kickteam/" + eventId, json));
-        EventManager.RemoveTeam(eventId, teamId);
+        EventManager.RemoveTeam(eventId, teamName);
         return res;
     }
 
