@@ -49,7 +49,7 @@ public class UserData : IUserData, IDisposable
 
 
 
-
+    //"{\"eMail\":\"glebushnik@gmail.com\",\"password\":\"gleb1234\",\"name\":\"gleb1234\"}"
     public async Task<InfoModel> Register(UserRegisterDto userDto)
     {
 
@@ -88,7 +88,7 @@ public class UserData : IUserData, IDisposable
         string result = await response.Content.ReadAsStringAsync();
 
         var info = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
-        if(!string.IsNullOrEmpty(info?.message))
+        if (!string.IsNullOrEmpty(info?.message))
             return info;
 
 
@@ -100,18 +100,12 @@ public class UserData : IUserData, IDisposable
             return null;
         }
 
-        
-
-
-
-        //"{\"message\":\"Этот пользователь пока не находится ни в какой команде.z\"}"
-
 
         return null;
     }
 
 
-    public async Task<InfoModel> GetVip(string userid)
+    public async Task<InfoModel> GetVip(string userid, UserLoginDto user)
     {
         try
         {
@@ -124,7 +118,7 @@ public class UserData : IUserData, IDisposable
             string result = await response.Content.ReadAsStringAsync();
 
 
-            if (!response.IsSuccessStatusCode) return  new InfoModel("Что-то пошло не так.");
+            if (!response.IsSuccessStatusCode) return new InfoModel("Что-то пошло не так.");
 
             var u = JsonSerializer.Deserialize<User>(result, CaseInsensitive);
 
@@ -140,7 +134,7 @@ public class UserData : IUserData, IDisposable
 
             string output = await userResponse.Content.ReadAsStringAsync();
 
-            if (userResponse.IsSuccessStatusCode) UserAppInfo.UserData.roles = new List<string> { "vip" };
+            await Login(user);
 
             return JsonSerializer.Deserialize<InfoModel>(output, CaseInsensitive);
 
@@ -155,10 +149,55 @@ public class UserData : IUserData, IDisposable
         }
     }
 
+    
+    public async Task<InfoModel> ResetPassword(string name, string eMail)
+    {
+        try
+        {
+            string json = JsonSerializer.Serialize(new { eMail, name });
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PostAsync($"user/resetpassword", data);
+
+
+
+            string result = await response.Content.ReadAsStringAsync();
+            var er =  JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return er;
+            }
+            throw new Exception(er.message);
+        }
+        catch (Exception ex)
+        {
+            return new InfoModel { message = ex.Message };
+        }
+    }
+
+
+
+    public async Task<InfoModel> SetNewPasssword(string name, NewPasswordDto newPassword)
+    {
+        string json = JsonSerializer.Serialize(new { name, newPassword.verificationCode, newPassword.password1, newPassword.password2 });
+        StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+        HttpResponseMessage response = await _client.PostAsync($"user/newpassword", data);
+
+        string result = await response.Content.ReadAsStringAsync();
+        var er = JsonSerializer.Deserialize<InfoModel>(result, CaseInsensitive);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return er;
+        }
+        throw new Exception(er.message);
+    }
 
 
     public void Dispose()
     {
         _client?.Dispose();
     }
+
+    
 }

@@ -1,3 +1,5 @@
+
+
 namespace NightWatchClientApp.Views;
 
 public partial class AllEventsPage : ContentPage
@@ -6,9 +8,7 @@ public partial class AllEventsPage : ContentPage
 	{
 		InitializeComponent();
 
-        MainBackground.Source = ImageSource.FromResource("NightWatchClientApp.Resources.Background.background.jpg");
-        MainBackground.Aspect = Aspect.Fill;
-
+        
         BindingContext = ServiceHelper.GetService<AllEventsViewModel>();
     }
 

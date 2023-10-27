@@ -165,7 +165,7 @@ public partial class MyTeamViewModel: ObservableObject
         }    
         finally
         {
-            ErrorMessage = err.message;
+            ErrorMessage = err?.message;
             await updater.StopTask();
             TurnLoginMessage = true;
 
@@ -219,46 +219,59 @@ public partial class MyTeamViewModel: ObservableObject
     {
         await Shell.Current.GoToAsync(nameof(TeamDetailsPage));
     }
-
+    
 
     [RelayCommand]
     private async Task DetailsEvent()
     {
-        #warning надо добавить
-
+        if (EventModel != null)
+        {
+            await Shell.Current.GoToAsync(nameof(EventDetailsPage), true, new Dictionary<string, object>
+            {
+                {nameof(EventModel), EventModel }
+            });
+        }
     }
-
 
     private DateTime ParseTime(string time)
     {
-        string format = "dd.MM.yyyy HH:mm:ss";
-        return DateTime.ParseExact(EventModel.Start, format, CultureInfo.InvariantCulture);
+        try
+        {
+            string format = "dd.MM.yyyy H:mm:ss";
+            return DateTime.ParseExact(time, format, CultureInfo.InvariantCulture);
+
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        return default;
     }
 
     [RelayCommand]
     private async Task GoPlay()
     {
-        //DateTime start = ParseTime(EventModel.Start);
-        //DateTime end = ParseTime(EventModel.End);
+        DateTime start = ParseTime(EventModel.Start);
+        DateTime end = ParseTime(EventModel.End);
+
+        if (start == default || end == default) return;
+        if (DateTime.UtcNow < start)
+        {
+            string mess = "событие еще не началось";
+            await Shell.Current.DisplayAlert("", mess, "ok");
+
+            return;
+        }
 
 
-        //if (DateTime.UtcNow < start)
-        //{
-        //    string mess = "событие еще не началось";
-        //    await Shell.Current.DisplayAlert("", mess, "ok");
+        if (DateTime.UtcNow > end)
+        {
+            string mess = "событие уже закончилось";
+            await Shell.Current.DisplayAlert("", mess, "ok");
+            return;
+        }
 
-        //    return;
-        //}
-                
-                
-        //if(DateTime.UtcNow > end)
-        //{
-        //    string mess = "событие уже закончилось";
-        //    await Shell.Current.DisplayAlert("", mess, "ok");
-        //    return;
-        //}
 
-        
         try
         {
 

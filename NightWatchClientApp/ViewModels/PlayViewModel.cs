@@ -19,7 +19,9 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
     [ObservableProperty] private EventModel eventModel;
     [ObservableProperty] private TaskModel currentTask;
     [ObservableProperty] private bool isCompleted;
+    [ObservableProperty] private bool isNotCompleted;
 
+    partial void OnIsCompletedChanged(bool oldValue, bool newValue) => IsNotCompleted = !newValue;
 
     [ObservableProperty] private string answer;
     private string EventId;
@@ -42,6 +44,11 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
         try
         {
             EventModel = await _eventData.GetEvent(EventId);
+
+            if(taskId < EventModel.questions.Count)
+            {
+                ShowWinner();
+            }
             CurrentTask = EventModel.questions[taskId];
             TeamModel = UserAppInfo.TeamData ?? throw new Exception("UserAppInfo.TeamData is null");
 
@@ -79,6 +86,7 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
                 }
                 else
                 {
+                    
                     ShowWinner();
                 }
             }
@@ -101,6 +109,8 @@ public partial class PlayViewModel: ObservableObject, IQueryAttributable
 
     private void ShowWinner()
     {
+        IsCompleted = true;
+
         InfoMessage = "вы прошли квест";
     }
 

@@ -110,8 +110,7 @@ public partial class LoginViewModel : ObservableObject
     [RelayCommand]
     private void GoToForgotPassword(object obj)
     {
-        LoginMessage = "эта страница пока не создана";
-        TurnLoginMessage = true;
+        Shell.Current.GoToAsync(nameof(ResetPasswordPage));
     }
 
     

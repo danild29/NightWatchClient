@@ -22,6 +22,7 @@ public class Team
     public List<User> members { get; set; }
     public string eventName { get; set; }
     public List<TaskModel> tasks { get; set; }
+    public int score { get; set; }
     public User captain { get; set; }
     public bool isInEvent { get; set; }
     public int __v { get; set; }

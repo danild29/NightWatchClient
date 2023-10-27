@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using NightWatchClientApp.Data.Services;
 
@@ -53,10 +54,18 @@ public partial class ProfileViewModel: ObservableObject
         }
         else
         {
-            InfoModel info = await _userData.GetVip(UserAppInfo.UserData._id);
+            string data = Preferences.Default.Get<string>(nameof(UserLoginDto), null);
+            if (data == null) return;
+
+            UserLoginDto user = JsonSerializer.Deserialize<UserLoginDto>(data);
+
+
+            InfoModel info = await _userData.GetVip(UserAppInfo.UserData._id, user);
             Message = info.message;
             await Application.Current.MainPage.DisplayAlert(Message, "перезайдите в аккаунт чтобы получить все привелегии", "ok");
             await LogOut();
+            
+            
         }
     }
 }

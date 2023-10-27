@@ -20,7 +20,6 @@ public class TeamData : ITeamData, IDisposable
     };
     private JsonSerializerOptions CaseInsensitive = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-    private int delay = 1000;
 
     public TeamData()
     {

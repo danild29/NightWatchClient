@@ -37,7 +37,10 @@ public partial class CreateEventViewModel: ObservableObject
     public CreateEventViewModel(IEventData eventData)
     {
         _eventData = eventData;
-        managedEvents = new ObservableCollection<EventModel>(_eventData.EventManager.Events);
+
+        Task.Run(LoadEvents);
+
+        //managedEvents = new ObservableCollection<EventModel>(_eventData.EventManager.Events);
     }
 
 

@@ -21,6 +21,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ManageEventPage), typeof(ManageEventPage));
 		Routing.RegisterRoute(nameof(TeamsInEventPage), typeof(TeamsInEventPage));
 		Routing.RegisterRoute(nameof(TeamDetailsPage), typeof(TeamDetailsPage));
+		Routing.RegisterRoute(nameof(ResetPasswordPage), typeof(ResetPasswordPage));
 
         IsVisibleEvents = true;
         BindingContext = this;

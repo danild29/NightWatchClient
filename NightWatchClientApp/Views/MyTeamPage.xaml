@@ -27,7 +27,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Label Text="{Binding ErrorMessage}" />
+                <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource NightWatchRegular}" FontSize="16" FontFamily="RobotoMono" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
 
                 <Frame BackgroundColor="White" BorderColor="White" Margin="15,30,15,0" CornerRadius="30" Padding="0" HeightRequest="222">
                     <StackLayout>
@@ -176,7 +176,7 @@
                             </Button>
                             
                             <!--Подробнее о мероприятии-->
-                            <Button Text="Подробнее" Opacity="0.5" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0" 
+                            <Button Text="Подробнее" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="0,0,24,0" 
                                     Command="{Binding DetailsEventCommand}"
                                         CornerRadius="20" HorizontalOptions="EndAndExpand" WidthRequest="131">
                                 <Button.Background>

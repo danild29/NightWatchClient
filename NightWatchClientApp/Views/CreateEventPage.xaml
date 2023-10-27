@@ -116,8 +116,8 @@
 
                             <Label Text="Начало события" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"
                                          Margin="30,14,35,0"/>
-                            <DatePicker Date="{Binding SelectedDateStart}" BackgroundColor="White" TextColor="Black" HorizontalOptions="Center" />
-                            <TimePicker Time="{Binding SelectedTimeStart}" Background="white" HorizontalOptions="Center"/>
+                            <DatePicker Date="{Binding SelectedDateStart}" BackgroundColor="White"  TextColor="Black" HorizontalOptions="Center" />
+                            <TimePicker Time="{Binding SelectedTimeStart}" Background="white" TextColor="Black" HorizontalOptions="Center"/>
 
                         </StackLayout>
 
@@ -125,8 +125,8 @@
 
                             <Label Text="Конец события" TextColor="{StaticResource NightWatchRegular}" FontSize="14" FontFamily="RobotoMono" FontAttributes="None" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand"
                                Margin="30,14,45,0"/>
-                            <DatePicker Date="{Binding SelectedDateEnd}" BackgroundColor="White" TextColor="Black" HorizontalOptions="Center"/>
-                            <TimePicker Time="{Binding SelectedTimeEnd}" Background="white" HorizontalOptions="Center"/>
+                            <DatePicker Date="{Binding SelectedDateEnd}"  TextColor="Black" HorizontalOptions="Center"/>
+                            <TimePicker Time="{Binding SelectedTimeEnd}" TextColor="Black" HorizontalOptions="Center"/>
 
                         </StackLayout>
                         
