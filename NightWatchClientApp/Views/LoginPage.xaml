@@ -13,7 +13,6 @@
             <StackLayout Padding="0,0,0,0">
                 <Frame BackgroundColor="White" CornerRadius="25" Margin="15,15,15,26" Padding="0,0,0,27">
                     <StackLayout>
-                        <Image Source="nw_logo.svg" HorizontalOptions="Center" VerticalOptions="Center" Margin="118,10,119,14"/>
 
                         <Line>
                             <Line.Background>
@@ -28,8 +27,7 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="Наша игра " TextColor="{StaticResource NightWatchBlue}" FontSize="14" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="-2" LineHeight="0.85"/>
-                                    <Span Text="- это Российская игра флеш-моб в формате ночных поисковых игр, 
-                               появившаяся в 2005 году и включающая в себя соревнования по городскому 
+                                    <Span Text="- это Российская игра флеш-моб в формате ночных поисковых игр, включающая в себя соревнования по городскому 
                                ориентированию, актёрские и ролевые 
                                уровни, экстремальные и логические 
                                задания" FontSize="14" TextColor="{StaticResource NightWatchBlue}" FontFamily="RobotoMono" FontAttributes="None" CharacterSpacing="-2" LineHeight="0.85"/>
@@ -50,6 +48,7 @@
 
                 <Frame HasShadow="True"  BackgroundColor="White" CornerRadius="25" Margin="39,0, 39, 72" Padding="0">
                     <StackLayout>
+                        <Label Text="{Binding LoginMessage}" IsVisible="true" TextColor="DarkRed" FontSize="12" />
                         <Label Text="Войдите, чтобы начать играть" FontSize="20" TextColor="{StaticResource NightWatchBlue}"
                                    FontFamily="RobotoMono" FontAttributes="Bold" HorizontalTextAlignment="Center" CharacterSpacing="0" LineHeight="1" Margin="59,25,59,0"/>
                         <Grid>
@@ -63,9 +62,11 @@
                             <Image Source="lockico.svg" Margin="20,22,6,0"/>
                             <Entry TextColor="Black" Placeholder="Пароль" HorizontalOptions="FillAndExpand" Text="{Binding UserPassword}" Margin="0,12,43,0"/>
                         </StackLayout>
-                        
-                        <Label Text="{Binding LoginMessage, Mode=OneWay}" IsVisible="{Binding TurnLoginMessage, Mode=OneWay}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
+                        <StackLayout Orientation="Horizontal">
+
+                            <Label Text="{Binding LoginMessage, Mode=OneWay}" IsVisible="{Binding TurnLoginMessage, Mode=OneWay}" TextColor="DarkRed" FontSize="12" FontFamily="RobotoMono" FontAttributes="None"
                                    HorizontalTextAlignment="Center" CharacterSpacing="-1.25" LineHeight="1"  Margin="44,0,43,0"/>
+                        </StackLayout>
                         <Button Text="Войти" TextColor="White" FontSize="12" FontFamily="RobotoMono" FontAttributes="Bold" CharacterSpacing="0" Margin="43,12,43,0"
                                     CornerRadius="20" Command="{Binding GoToMainPageCommand}">
                             <Button.Background>

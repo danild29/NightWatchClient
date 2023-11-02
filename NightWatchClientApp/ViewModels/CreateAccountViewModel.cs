@@ -22,7 +22,7 @@ public partial class CreateAccountViewModel : ObservableObject
     [ObservableProperty] private string userPassword;
     [ObservableProperty] private string userRepeatPassword;
     [ObservableProperty] private string userNickName;
-    [ObservableProperty] private string loginMessage;
+    [ObservableProperty] private string loginMessage = "";
     [ObservableProperty] private bool turnLoginMessage = false;
 
     [ObservableProperty] private bool isBusy = false;
@@ -53,17 +53,30 @@ public partial class CreateAccountViewModel : ObservableObject
         }
         else
         {
-            StringBuilder mes = new();
-            
-            mes.AppendLine(er.message);
-
-            foreach(var i in er.errors.errors)
+            try
             {
-                mes.AppendLine(i.msg);
-            }
+                StringBuilder mes = new();
+            
+                string ad = er.message;
 
-            LoginMessage =mes.ToString();
-            TurnLoginMessage = true;
+                foreach(var i in er.errors.errors)
+                {
+                    ad += Environment.NewLine +  i.msg;
+                }
+
+                var e = er.errors.errors.FirstOrDefault();
+                if (LoginMessage != null)
+                {
+                    LoginMessage = e.msg;
+                    TurnLoginMessage = true;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         IsBusy = false;
     }
